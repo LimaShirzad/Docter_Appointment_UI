@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Link Boxes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 30px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 0 15px;
+        }
+        
+        h1 {
+            font-weight: 800;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .subtitle {
+            color: #6c757d;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .link-box {
+            display: block;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            text-decoration: none;
+            color: var(--dark);
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .link-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .link-box:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .link-box .icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .link-box h3 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .link-box p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+        
+        .link-box:hover .icon {
+            animation: pulse 0.8s ease;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 70px;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        /* Color variations */
+        .box-1 .icon { color: #4361ee; }
+        .box-2 .icon { color: #3a0ca3; }
+        .box-3 .icon { color: #7209b7; }
+        .box-4 .icon { color: #f72585; }
+        .box-5 .icon { color: #4cc9f0; }
+        .box-6 .icon { color: #4895ef; }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .link-box {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Our Digital Services</h1>
+            <p class="subtitle">Discover our comprehensive range of digital solutions designed to elevate your business and streamline your operations</p>
+        </div>
+        
+        <!-- Link Boxes -->
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <a href="#" class="link-box box-1">
+                    <div class="icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Scalable cloud infrastructure and services tailored to your business needs with 24/7 support.</p>
+                </a>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <a href="#" class="link-box box-2">
+                    <div class="icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Security Services</h3>
+                    <p>Advanced security solutions to protect your data and infrastructure from modern threats.</p>
+                </a>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <a href="#" class="link-box box-3">
+                    <div class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Data Analytics</h3>
+                    <p>Transform your business data into actionable insights with our analytics platform.</p>
+                </a>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <a href="#" class="link-box box-4">
+                    <div class="icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Development</h3>
+                    <p>Custom mobile applications built for iOS and Android to engage your customers.</p>
+                </a>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <a href="#" class="link-box box-5">
+                    <div class="icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Solutions</h3>
+                    <p>Leverage artificial intelligence to automate processes and enhance decision-making.</p>
+                </a>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <a href="#" class="link-box box-6">
+                    <div class="icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>IT Consulting</h3>
+                    <p>Expert technology consulting to align your IT strategy with business objectives.</p>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2023 Digital Solutions Inc. • All rights reserved</p>
+        </div>
+    </div>
+</body>
+</html>
