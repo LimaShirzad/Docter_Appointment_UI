@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const headerHTML = `
 
   <nav id="sidebar" class="sidebar p-3">
-  <h4 class="text-white" id="brand"> MyClinic</h4>
+  <h4 class="text-white" id="brand"> </h4>
   <a href="index.html" ><i class="bi bi-speedometer2"></i><span id="dashbord_link" class="p-2"></span> </a>
   <a href="docters.html" ><i class="bi bi-calendar-check"></i> <span id="docter_link" class="p-2"></span> </a>
   <a href="patients.html" ><i class="bi bi-people"></i>  <span id="patient_link" class="p-2"></span></a>
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <main class="col-md-10 offset-md-2 ms-sm-auto px-md-4" style="margin-left:220px;">
 
-  <div class="header">
+  <div class="dash_header" >
     <button class="toggle-btn" onclick="toggleSidebar()">
       <i class="bi bi-list"></i>
     </button>
