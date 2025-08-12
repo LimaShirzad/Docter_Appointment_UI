@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    
+        <div id="sidebar_box"></div>
+       
+        <div class="main-content">
+           
+        <div id="header_box"></div>
+             
+                <div class="page active p-3" id="dashboard">
+                    <div class="page-header">
+                        <h1 class="page-title">Dashboard</h1>
+                        <div class="date-selector">
+                            <select class="form-select">
+                                <option>Today</option>
+                                <option>This Week</option>
+                                <option>This Month</option>
+                                <option>This Year</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="stats-card">
+                                <div class="card-icon bg-primary-light">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <h3 class="card-title">Total Doctors</h3>
+                                <div class="card-value">42</div>
+                                <div class="card-change positive">
+                                    <i class="fas fa-arrow-up"></i> 12% from last month
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 col-sm-6">
+                            <div class="stats-card">
+                                <div class="card-icon bg-success-light">
+                                    <i class="fas fa-procedures"></i>
+                                </div>
+                                <h3 class="card-title">Total Patients</h3>
+                                <div class="card-value">1,254</div>
+                                <div class="card-change positive">
+                                    <i class="fas fa-arrow-up"></i> 8% from last month
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 col-sm-6">
+                            <div class="stats-card">
+                                <div class="card-icon bg-warning-light">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <h3 class="card-title">Appointments</h3>
+                                <div class="card-value">78</div>
+                                <div class="card-change negative">
+                                    <i class="fas fa-arrow-down"></i> 3% from yesterday
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 col-sm-6">
+                            <div class="stats-card">
+                                <div class="card-icon bg-danger-light">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <h3 class="card-title">Revenue</h3>
+                                <div class="card-value">$24,560</div>
+                                <div class="card-change positive">
+                                    <i class="fas fa-arrow-up"></i> 15% from last month
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Appointment Statistics</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="appointmentsChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Doctor Specialties</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="specialtiesChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Recent Appointments</h5>
+                                    <button class="btn btn-primary">View All</button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Patient</th>
+                                                    <th>Doctor</th>
+                                                    <th>Date & Time</th>
+                                                    <th>Specialty</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="user-avatar-sm">MR</div>
+                                                            Michael Roberts
+                                                        </div>
+                                                    </td>
+                                                    <td>Dr. Sarah Johnson</td>
+                                                    <td>Jun 15, 2023 - 10:30 AM</td>
+                                                    <td>Cardiology</td>
+                                                    <td><span class="status-badge badge-success">Confirmed</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">Details</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="user-avatar-sm">JP</div>
+                                                            Jennifer Parker
+                                                        </div>
+                                                    </td>
+                                                    <td>Dr. David Wilson</td>
+                                                    <td>Jun 15, 2023 - 11:00 AM</td>
+                                                    <td>Dermatology</td>
+                                                    <td><span class="status-badge badge-warning">Pending</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">Details</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="user-avatar-sm">RS</div>
+                                                            Robert Smith
+                                                        </div>
+                                                    </td>
+                                                    <td>Dr. Emily Chen</td>
+                                                    <td>Jun 15, 2023 - 1:30 PM</td>
+                                                    <td>Orthopedics</td>
+                                                    <td><span class="status-badge badge-success">Confirmed</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">Details</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="user-avatar-sm">LM</div>
+                                                            Lisa Morgan
+                                                        </div>
+                                                    </td>
+                                                    <td>Dr. James Brown</td>
+                                                    <td>Jun 15, 2023 - 2:15 PM</td>
+                                                    <td>Pediatrics</td>
+                                                    <td><span class="status-badge badge-danger">Cancelled</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">Details</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+           
+   </div>
+
+
+
+
+
+
+                <footer class="footer">
+                <div>&copy; 2023 MediCare - Doctor Appointment System. All rights reserved.</div>
+            </footer>
+        </div>
+    </div>
+   
+  
+     <script src="assets/js/seconddas.js"></script>
+        <script src="assets/js/dashbord.js"></script>
+
+</body>
+</html>
