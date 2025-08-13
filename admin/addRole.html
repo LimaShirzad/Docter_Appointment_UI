@@ -21,31 +21,32 @@
     <div class="container mt-4">
         <div class="role_card">
             <div class="role_card-header">
-                <h1><i class="fas fa-stethoscope"></i>Add New Medical Specialty</h1>
+                <h1>Add New Role</h1>
             </div>
             
             <div class="card-body">
-                <div class="medical-icon">
+                <!-- <div class="medical-icon">
                     <i class="fas fa-heartbeat"></i>
-                </div>
+                </div> -->
                 
-                <form id="specialtyForm">
+                <form id="RoleForm" >
                     <div class="form-group">
-                        <label for="specialtyName">Specialty Name</label>
+                        <label for="Role">Role</label>
                         <div class="role_input-container">
-                            <i class="fas fa-tag input-icon"></i>
                             <input 
                                 type="text" 
-                                id="specialtyName" 
-                                placeholder="Enter specialty name (e.g. Cardiology, Neurology)" 
-                                required
+                                id="role" 
+                                placeholder="Enter Role Name  " 
+                                
+                               
                             >
+                            <span id="msg"></span>
                         </div>
                     </div>
                     
                     <div class="btn-group">
                         <button type="submit" class="btn submit-btn">
-                            <i class="fas fa-plus-circle"></i> Add Specialty
+                            <i class="fas fa-plus-circle"></i> Add Role
                         </button>
                         <button type="button" class="btn cancel-btn">
                             <i class="fas fa-times"></i> Cancel
@@ -64,5 +65,12 @@
 
 <script src="assets/js/comman.js"></script>
 <script src="assets/js/dashbord.js"></script>
+<script src="assets/js/app.js"></script>
+
+
+
+
+
+
 </body>
 </html>
