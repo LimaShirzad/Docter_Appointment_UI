@@ -90,6 +90,9 @@
             color: white;
             border-left: 3px solid var(--accent);
         }
+        .sidebar-menu a{
+                background: transparent;
+        }
         
         .sidebar-menu a i {
             width: 30px;
@@ -781,3 +784,95 @@ margin-top: -40px;
 }
 
  /* =======================add specialty end================ */
+
+
+ #msg_box{
+
+     width: 250px;
+     height: 50px;
+     background: rgb(12, 145, 12);
+     border-radius: 12px;
+     position: fixed;
+     top: 12%;
+     z-index: 1000;
+     right: -100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+    /* font-size: 1rem; */
+    /* font-weight: bold; */
+    color: white;
+    transition: 0.5s;
+ }
+
+
+ .confirm-overlay {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    text-transform: capitalize;
+}
+
+.confirm-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.confirm-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+@keyframes fadeIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.alert-overlay {
+    display: none;
+    position: fixed;
+    top: 190px;
+    right: 20px;
+    z-index: 2000;
+    text-transform: capitalize;
+ 
+}
+
+.alert-box {
+    padding: 15px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #fff;
+    animation: fadeSlideIn 0.4s ease forwards;
+}
+
+.alert-box.success {
+    background-color: #28a745; /* Green */
+}
+
+.alert-box.error {
+    background-color: #dc3545; /* Red */
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+}

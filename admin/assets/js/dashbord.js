@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+
   document.getElementById("sidebar_box").innerHTML = `
    
       <div class="sidebar">
@@ -11,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="sidebar-menu">
                 <ul>
                     <li>
-                        <a href="dashbord.html" class="active" >
+                        <a href="dashbord.html"  >
                             <i class="fas fa-home"></i>
                             <span>Dashboard</span>
                         </a>
@@ -59,13 +60,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
   `;
-});
 
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("header_box").innerHTML = `
+    document.getElementById("header_box").innerHTML = `
    
   
  <header class="header">
@@ -98,34 +96,105 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   `;
-});
 
- document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('active');
-        });
-        
-        // Navigation between pages
-        document.querySelectorAll('.sidebar-menu a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Remove active class from all links
-                document.querySelectorAll('.sidebar-menu a').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Add active class to clicked link
+
+
+   document.getElementById('menu-toggle').addEventListener('click', function () {
+        document.querySelector('.sidebar').classList.toggle('active');
+    });
+
+      
+
+
+  const currentPage = window.location.pathname.split("/").pop(); // get current file name
+    document.querySelectorAll('.sidebar-menu a').forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        }
+
+        // Add click event for mobile toggle and active state
+        link.addEventListener('click', function (e) {
+            // Prevent default only if href is valid
+            if (linkPage !== "#") {
+                // Remove active from all links
+                document.querySelectorAll('.sidebar-menu a').forEach(item => item.classList.remove('active'));
                 this.classList.add('active');
-                
-             
-                });
-                
-            
-                // Close sidebar on mobile after selection
+
+                // Close sidebar on mobile
                 if (window.innerWidth < 992) {
                     document.querySelector('.sidebar').classList.remove('active');
                 }
- });
+
+                // Navigate to page
+                window.location.href = linkPage;
+            }
+        });
+    });
+
+});
+
+    //  document.querySelectorAll('.sidebar-menu a').forEach(link => {
+    //     if (link.href === window.location.href) {
+    //         link.classList.add('active');
+    //     }
+    // });
+
+    // document.querySelectorAll('.sidebar-menu a').forEach(link => {
+    //     link.addEventListener('click', function (e) {
+    //         e.preventDefault();
+
+    //         // Remove active from all
+    //         document.querySelectorAll('.sidebar-menu a').forEach(item => {
+    //             item.classList.remove('active');
+    //         });
+
+    //         // Add active to clicked
+    //         this.classList.add('active');
+
+    //         // Close sidebar in mobile
+    //         if (window.innerWidth < 992) {
+    //             document.querySelector('.sidebar').classList.remove('active');
+            // }
+
+            // Navigate to page
+            // window.location.href = this.getAttribute("href");
+        // });
+    // });
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+
+// });
+
+//  document.getElementById('menu-toggle').addEventListener('click', function() {
+//             document.querySelector('.sidebar').classList.toggle('active');
+//         });
+        
+//         // Navigation between pages
+//         document.querySelectorAll('.sidebar-menu a').forEach(link => {
+//             link.addEventListener('click', function(e) {
+//                 e.preventDefault();
+                
+//                 // Remove active class from all links
+//                 document.querySelectorAll('.sidebar-menu a').forEach(item => {
+//                     item.classList.remove('active');
+//                 });
+                
+//                 // Add active class to clicked link
+//                 this.classList.add('active');
+                
+             
+//                 });
+                
+            
+//                 // Close sidebar on mobile after selection
+//                 if (window.innerWidth < 992) {
+//                     document.querySelector('.sidebar').classList.remove('active');
+//                 }
+//  });
 
 
           
