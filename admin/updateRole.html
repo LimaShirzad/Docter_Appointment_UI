@@ -65,10 +65,7 @@
         </div>
 
 
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, maiores! Accusamus mollitia nisi odio ex ipsam velit sequi distinctio aspernatur delectus a neque, adipisci explicabo sit molestiae sed ut? Veritatis, magnam ducimus! Nihil qui eos explicabo, ducimus totam rem ullam id aliquam? Laborum inventore tempora eligendi dolorem ab commodi, quo officia ratione in et, cupiditate sit rerum quam illum adipisci.
-        </p>
-
+      
 
 <div id="msg_box" class="card"></div>
  
@@ -77,76 +74,6 @@
 <script src="assets/js/dashbord.js"></script>
 <script src="assets/js/app.js"></script>
 
-<!-- <script>
-// 1. Get role ID from URL
-const params = new URLSearchParams(window.location.search);
-const roleId = params.get("id");
-
-// 2. Get input fields
-const roleInput = document.getElementById("role");
-const roleIdInput = document.getElementById("roleId");
-
-// 3. Load existing role from backend
-fetch("http://localhost:8080/api/roles/" + roleId)
-    .then(res => res.json())
-    .then(data => {
-        roleInput.value = data.role;    // show role name
-        roleIdInput.value = data.id;    // store role ID
-    })
-    .catch(err => alert("Error loading role"));
-
-// 4. Update role when form is submitted
-document.getElementById("updateRoleForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    fetch("http://localhost:8080/api/roles/" + roleId, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ role: roleInput.value })
-    })
-    .then(res => {
-        if (res.ok) {
-            alert("Role updated!");
-            window.location.href = "userRoles.html"; // back to table
-        } else {
-            alert("Update failed!");
-        }
-    });
-});
-
-// 5. Cancel button
-document.getElementById("role_cancel_btn").addEventListener("click", function() {
-    window.location.href = "userRoles.html";
-});
-</script> -->
-
-<!-- <script>
-document.getElementById("updateRoleForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const msg = document.getElementById("msg");
-
-    fetch("http://localhost:8080/api/roles/" + roleId, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ role: roleInput.value })
-    })
-    .then(res => res.json().then(data => ({ ok: res.ok, data })))
-    .then(res => {
-        if (res.ok) {
-            alert("Role updated!");
-            window.location.href = "userRoles.html";
-        } else {
-            // show error from backend
-            msg.innerText = res.data.errors?.role || res.data.message || "Update failed!";
-            msg.style.color = "red";
-        }
-    })
-    .catch(() => {
-        msg.innerText = "Something went wrong!";
-        msg.style.color = "red";
-    });
-});
-</script> -->
 
 
 
