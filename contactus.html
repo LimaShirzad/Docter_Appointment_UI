@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare Pro | Contact Us</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --med-blue: #1a76d1;
+            --light-blue: #e3f2fd;
+            --dark: #212529;
+            --light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .contact-header {
+            background: linear-gradient(135deg, var(--med-blue) 0%, var(--primary) 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .contact-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+        }
+        
+        .contact-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-form {
+            padding: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--dark);
+            display: block;
+        }
+        
+        .form-control {
+            border: 2px solid #e9ecef;
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-send {
+            background: linear-gradient(135deg, var(--med-blue) 0%, var(--primary) 100%);
+            border: none;
+            padding: 15px 30px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn-send:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(13, 110, 253, 0.3);
+        }
+        
+        .contact-info {
+            background: var(--light-blue);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .contact-info h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .info-icon {
+            background: var(--primary);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .info-content h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .info-content p {
+            margin: 0;
+            color: #555;
+        }
+        
+        /* Success message */
+        #successMessage {
+            display: none;
+            background: #198754;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .contact-header {
+                padding: 30px 20px;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+            
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="contact-container">
+            <div class="contact-card">
+                <div class="contact-header" data-aos="fade-down">
+                    <h1>Contact MediCare Pro</h1>
+                    <p>Have questions or need assistance? Our team is ready to help you with any inquiries. Reach out to us today.</p>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group" data-aos="fade-right" data-aos-delay="100">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="John Smith" required>
+                        </div>
+                        
+                        <div class="form-group" data-aos="fade-right" data-aos-delay="150">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
+                        </div>
+                        
+                        <div class="form-group" data-aos="fade-right" data-aos-delay="200">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="subject" placeholder="How can we help you?" required>
+                        </div>
+                        
+                        <div class="form-group" data-aos="fade-right" data-aos-delay="250">
+                            <label for="message" class="form-label">Your Message</label>
+                            <textarea class="form-control" id="message" placeholder="Type your message here..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-send" data-aos="fade-up" data-aos-delay="300">
+                            <i class="fas fa-paper-plane me-2"></i> Send Message
+                        </button>
+                        
+                        <div id="successMessage">
+                            <i class="fas fa-check-circle fa-2x mb-3"></i>
+                            <h3>Message Sent Successfully!</h3>
+                            <p>Thank you for contacting us. We'll get back to you shortly.</p>
+                        </div>
+                    </form>
+                    
+                    <div class="contact-info" data-aos="fade-up" data-aos-delay="400">
+                        <h3>Contact Information</h3>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Our Location</h4>
+                                <p>123 Medical Drive, Health City, HC 12345</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Phone Number</h4>
+                                <p>+1 (123) 456-7890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Email Address</h4>
+                                <p>info@medicare.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="far fa-clock"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Working Hours</h4>
+                                <p>Mon-Fri: 8:00 AM - 7:00 PM<br>Sat-Sun: 9:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                once: true
+            });
+            
+            // Form submission handling
+            const contactForm = document.getElementById('contactForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple validation
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                if (!name || !email || !subject || !message) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                // Simulate form submission
+                setTimeout(function() {
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Reset form after 5 seconds
+                    setTimeout(function() {
+                        contactForm.reset();
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
