@@ -3,113 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediCare - Professional Registration</title>
+    <title>Docoree - Doctor Appointment Registration</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4361ee;
-            --secondary: #3a0ca3;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --light-blue: #f0f5ff;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0ea5e9;
+            --accent: #06b6d4;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --success: #10b981;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
             min-height: 100vh;
             display: flex;
             align-items: center;
             padding: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
         }
         
-        .registration-container {
-            max-width: 800px;
-            margin: 0 auto;
+        .form-container {
             background: white;
             border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 150, 0.1);
             overflow: hidden;
-            box-shadow: 0 12px 40px rgba(67, 97, 238, 0.15);
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
         }
         
-        .registration-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        .form-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
-            padding: 25px 40px;
+            padding: 40px 30px;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
         
-        .registration-header::before {
+        .form-header::before {
             content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-            background-size: cover;
-            opacity: 0.6;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
         }
         
-        .registration-header-content {
+        .header-content {
             position: relative;
             z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 20px;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
-        .medical-icon {
-            background: rgba(255, 255, 255, 0.15);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        .form-header h1 {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .form-header p {
+            opacity: 0.9;
+            margin: 0;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        
+        .brand-logo {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            margin-bottom: 20px;
         }
         
-        .header-text {
-            flex: 1;
+        .brand-logo i {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            color: #cffafe;
         }
         
-        .header-text h1 {
+        .brand-logo span {
             font-weight: 700;
-            font-size: 1.8rem;
-            margin-bottom: 5px;
+            font-size: 2.2rem;
         }
         
-        .header-text p {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin: 0;
-        }
-        
-        .registration-form {
+        .form-body {
             padding: 40px;
         }
         
-        .form-section {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
         }
         
-        .form-section h3 {
+        @media (min-width: 992px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .form-section {
+            margin-bottom: 28px;
+        }
+        
+        .section-title {
             color: var(--primary);
-            margin-bottom: 25px;
             font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.25rem;
         }
         
-        .form-section h3 i {
-            background: rgba(67, 97, 238, 0.1);
+        .section-title i {
+            margin-right: 10px;
+            background: rgba(37, 99, 235, 0.1);
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -120,308 +150,446 @@
         }
         
         .form-label {
-            font-weight: 600;
-            color: var(--dark);
+            font-weight: 500;
+            color: #475569;
             margin-bottom: 8px;
-            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-label i {
+            margin-right: 8px;
+            color: var(--accent);
+            width: 24px;
+            text-align: center;
         }
         
         .form-control, .form-select {
-            padding: 12px 15px;
-            border-radius: 10px;
-            border: 1px solid #e0e6ed;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            font-size: 1rem;
             transition: all 0.3s;
-            font-size: 0.95rem;
         }
         
         .form-control:focus, .form-select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.15);
         }
         
-        .profile-preview {
-            width: 120px;
-            height: 120px;
+        .profile-pic-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .profile-pic-preview {
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            background: #f8f9fa;
-            border: 2px solid #e0e6ed;
+            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            margin: 0 auto 20px;
+            border: 2px dashed var(--accent);
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
         }
         
-        .profile-preview:hover {
-            border-color: var(--primary);
-            background: #f0f5ff;
+        .profile-pic-preview:hover {
+            transform: scale(1.05);
+            border-style: solid;
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.2);
         }
         
-        .profile-preview img {
+        .profile-pic-preview img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: none;
         }
         
-        .profile-preview i {
-            font-size: 2rem;
-            color: #adb5bd;
+        .profile-pic-preview i {
+            font-size: 48px;
+            color: var(--accent);
         }
         
-        .gender-options {
+        .password-container {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.2s;
+            font-size: 1.1rem;
+        }
+        
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+        
+        .gender-container {
             display: flex;
             gap: 15px;
-            margin-top: 10px;
+            margin-top: 5px;
         }
         
         .gender-option {
             flex: 1;
             text-align: center;
-            padding: 12px;
-            border: 2px solid #e9ecef;
+            border: 2px solid var(--border);
             border-radius: 10px;
+            padding: 15px 10px;
             cursor: pointer;
             transition: all 0.3s;
         }
         
         .gender-option:hover {
-            border-color: var(--primary);
-            background: rgba(67, 97, 238, 0.05);
+            border-color: var(--accent);
+            background-color: #f8fafc;
         }
         
-        .gender-option.active {
+        .gender-option.selected {
             border-color: var(--primary);
-            background: rgba(67, 97, 238, 0.1);
+            background-color: rgba(37, 99, 235, 0.05);
         }
         
         .gender-option i {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 8px;
             color: var(--primary);
         }
         
-        .role-selection {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-        }
-        
-        .role-option {
-            flex: 1;
-            text-align: center;
-            padding: 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: #f8f9fa;
-        }
-        
-        .role-option:hover {
-            border-color: var(--primary);
-            background: rgba(67, 97, 238, 0.05);
-        }
-        
-        .role-option.active {
-            border-color: var(--primary);
-            background: rgba(67, 97, 238, 0.1);
-        }
-        
-        .role-option i {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        .role-option .role-title {
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 5px;
-        }
-        
-        .role-option .role-desc {
-            font-size: 0.85rem;
-            color: #6c757d;
-        }
-        
         .btn-submit {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             border: none;
-            padding: 14px 25px;
-            font-size: 1rem;
+            padding: 16px 30px;
+            font-size: 1.1rem;
             font-weight: 600;
-            border-radius: 10px;
-            width: 100%;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.25);
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 12px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+            color: white;
         }
         
         .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(37, 99, 235, 0.3);
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
         }
         
         .login-link {
             text-align: center;
-            margin-top: 20px;
-            color: #6c757d;
-            font-size: 0.95rem;
+            margin-top: 25px;
+            color: #64748b;
+            font-size: 1rem;
         }
         
         .login-link a {
             color: var(--primary);
-            text-decoration: none;
             font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
         }
         
+        .login-link a:hover {
+            text-decoration: underline;
+            color: var(--primary-dark);
+        }
+        
+        .terms-container {
+            background-color: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .form-check-input:focus {
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
+        }
+        
+        .form-check-label a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .form-check-label a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile-specific styles */
         @media (max-width: 768px) {
-            .registration-container {
-                margin: 20px;
+            .form-body {
+                padding: 25px;
             }
             
-            .registration-header {
-                padding: 20px;
-            }
-            
-            .registration-form {
+            .form-header {
                 padding: 30px 20px;
             }
             
-            .gender-options, .role-selection {
-                flex-direction: column;
+            .form-header h1 {
+                font-size: 2rem;
             }
             
-            .registration-header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
+            .form-header p {
+                font-size: 1rem;
             }
             
-            .medical-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
+            .gender-container {
+                flex-direction: column;
+                gap: 10px;
             }
+            
+            .profile-pic-preview {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .brand-logo i {
+                font-size: 2rem;
+            }
+            
+            .brand-logo span {
+                font-size: 1.8rem;
+            }
+        }
+        
+        .form-decoration {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .decoration-circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
 <body>
-    <div class="registration-container">
-        <div class="registration-header">
-            <div class="registration-header-content">
-                <div class="medical-icon">
-                    <i class="fas fa-heartbeat"></i>
-                </div>
-                <div class="header-text">
-                    <h1>Create Your MediCare Account</h1>
-                    <p>Join our healthcare platform to book appointments with ease</p>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <div class="header-content">
+                    
+                    <h1>Create Your Account</h1>
+                    <p>Join our platform to book doctor appointments with ease</p>
+            
                 </div>
             </div>
-        </div>
-        
-        <div class="registration-form">
-            <form id="registration_form">
-                <!-- Personal Information Section -->
-                <div class="form-section">
-                    <h3><i class="fas fa-user"></i> Personal Information</h3>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="first_name" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="first_name" placeholder="Enter your first name" required>
+            
+            <div class="form-body">
+                <form id="registrationForm">
+                    <div class="form-grid">
+                        <div class="left-column">
+                            <!-- Personal Information Section -->
+                            <div class="form-section">
+                                <div class="section-title">
+                                    <i class="fas fa-user"></i>
+                                    Personal Information
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="firstName" class="form-label">
+                                        <i class="fas fa-signature"></i>First Name
+                                    </label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="lastName" class="form-label">
+                                        <i class="fas fa-signature"></i>Last Name
+                                    </label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="email" class="form-label">
+                                        <i class="fas fa-envelope"></i>Email Address
+                                    </label>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="form-label">
+                                        <i class="fas fa-venus-mars"></i>Gender
+                                    </label>
+                                    <div class="gender-container">
+                                        <div class="gender-option" data-value="male">
+                                            <i class="fas fa-male"></i>
+                                            <div>Male</div>
+                                        </div>
+                                        <div class="gender-option" data-value="female">
+                                            <i class="fas fa-female"></i>
+                                            <div>Female</div>
+                                        </div>
+                                        <div class="gender-option" data-value="other">
+                                            <i class="fas fa-genderless"></i>
+                                            <div>Other</div>
+                                        </div>
+
+
+                                        
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                            
+                            <!-- Profile Picture Section -->
+                           <div class="form-section"> 
+                               
+                                 <div class="profile-pic-container"> 
+                                    <div class="profile-pic-preview" id="profilePicPreview">
+                                        <i class="fas fa-user-plus"></i>
+                                        <img id="previewImage" src="" alt="Preview">
+                                    </div>
+                                    <input type="file" class="form-control d-none" id="profilePic" accept="image/*">
+                                    <button type="button" class="btn btn-outline-primary" id="uploadBtn">
+                                        <i class="fas fa-cloud-upload-alt me-2"></i>Upload Photo
+                                    </button>
+                                </div> 
+                            </div> 
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="last_name" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" placeholder="Enter your last name" required>
+                        
+                        <div class="right-column">
+                            <!-- Account Information Section -->
+                            <div class="form-section">
+                                <div class="section-title">
+                                    <i class="fas fa-lock"></i>
+                                    Account Information
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="username" class="form-label">
+                                        <i class="fas fa-user-circle"></i>Username
+                                    </label>
+                                    <input type="text" class="form-control" id="username" placeholder="Choose a username" required>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="role" class="form-label">
+                                        <i class="fas fa-user-tag"></i>Role
+                                    </label>
+                                    <select class="form-select" id="role" required>
+                                        <option value="" selected disabled>Select your role</option>
+                             
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="password" class="form-label">
+                                        <i class="fas fa-key"></i>Password
+                                    </label>
+                                    <div class="password-container">
+                                        <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+                                        <span class="password-toggle" id="passwordToggle">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <!-- <div class="mb-4">
+                                    <label for="confirmPassword" class="form-label">
+                                        <i class="fas fa-key"></i>Confirm Password
+                                    </label>
+                                    <div class="password-container">
+                                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                                        <span class="password-toggle" id="confirmPasswordToggle">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div> -->
+                            </div>
+                            
+                            <!-- Terms and Submit -->
+                          
+                              
                         </div>
                     </div>
-                    
-                    <div class="mb-4">
-                        <label class="form-label">Gender</label>
-                        <div class="gender-options">
-                            <div class="gender-option" data-gender="male">
-                                <i class="fas fa-male"></i>
-                                <div>Male</div>
+                      <button type="submit" class="btn btn-submit">
+                                    <i class="fas fa-user-plus me-2"></i>Create Account
+                                </button>
+                                
+                                <div class="login-link">
+                                    Already have an account? <a href="#">Sign In</a>
+                                </div>
                             </div>
-                            <div class="gender-option" data-gender="female">
-                                <i class="fas fa-female"></i>
-                                <div>Female</div>
-                            </div>
-                            <div class="gender-option" data-gender="other">
-                                <i class="fas fa-genderless"></i>
-                                <div>Other</div>
-                            </div>
-                        </div>
-                        <input type="hidden" id="gender" name="gender" required>
-                    </div>
-                </div>
-                
-                <!-- Account Information Section -->
-                <div class="form-section">
-                    <h3><i class="fas fa-lock"></i> Account Information</h3>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="Choose a username" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Create a password" required>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <label class="form-label">Register As</label>
-                        <div class="role-selection">
-                            <div class="role-option" data-role="doctor">
-                                <i class="fas fa-user-md"></i>
-                                <div class="role-title">Doctor</div>
-                                <div class="role-desc">Medical professional</div>
-                            </div>
-                            <div class="role-option" data-role="patient">
-                                <i class="fas fa-user-injured"></i>
-                                <div class="role-title">Patient</div>
-                                <div class="role-desc">Book appointments</div>
-                            </div>
-                        </div>
-                        <input type="hidden" id="role_id" name="role_id" required>
-                    </div>
-                </div>
-                
-                <!-- Profile Picture Section -->
-                <div class="form-section">
-                    <h3><i class="fas fa-camera"></i> Profile Picture</h3>
-                    <div class="text-center">
-                        <div class="profile-preview" id="profilePreview">
-                            <i class="fas fa-user-plus"></i>
-                            <img id="profileImage" src="" alt="Profile Preview">
-                        </div>
-                        <input type="file" id="profile_picture" class="d-none" accept="image/*">
-                        <button type="button" class="btn btn-outline-primary" id="uploadBtn">
-                            <i class="fas fa-upload me-2"></i>Upload Photo
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Submit Button -->
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-user-plus"></i> Create Account
-                </button>
-                
-                <div class="login-link">
-                    Already have an account? <a href="#">Sign In</a>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 
- 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Password toggle functionality
+            const passwordToggle = document.getElementById('passwordToggle');
+            const passwordField = document.getElementById('password');
+            const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
+            const confirmPasswordField = document.getElementById('confirmPassword');
+            
+            function togglePasswordVisibility(field, toggle) {
+                if (field.type === 'password') {
+                    field.type = 'text';
+                    toggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+                } else {
+                    field.type = 'password';
+                    toggle.innerHTML = '<i class="fas fa-eye"></i>';
+                }
+            }
+            
+            passwordToggle.addEventListener('click', function() {
+                togglePasswordVisibility(passwordField, passwordToggle);
+            });
+            
+            confirmPasswordToggle.addEventListener('click', function() {
+                togglePasswordVisibility(confirmPasswordField, confirmPasswordToggle);
+            });
+            
+            // Profile picture upload
+            const profilePicPreview = document.getElementById('profilePicPreview');
+            const profilePicInput = document.getElementById('profilePic');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const previewImage = document.getElementById('previewImage');
+            
+            uploadBtn.addEventListener('click', function() {
+                profilePicInput.click();
+            });
+            
+            profilePicInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;
+                        previewImage.style.display = 'block';
+                        profilePicPreview.querySelector('i').style.display = 'none';
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Gender selection
+        
+        });
+    </script>
 </body>
 </html>

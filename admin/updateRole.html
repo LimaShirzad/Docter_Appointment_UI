@@ -83,7 +83,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const form = document.getElementById("updateRoleForm");
+    const updateForm = document.getElementById("updateRoleForm");
     const roleInput = document.getElementById("role");
     const roleIdInput = document.getElementById("roleId");
     const msg = document.getElementById("msg");
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // 3. Handle form submit
-    form.onsubmit = async e => {
+    updateForm.onsubmit = async e => {
         e.preventDefault();
         msg.innerText = "";
         msgBox.innerText = "";
@@ -143,6 +143,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             } else {
                 msgBox.innerText = "Role Updated Successfully!";
                 msgBox.style.right = "0";
+                window.location.href = "userRoles.html";
+
                 setTimeout(() => {
                     msgBox.style.right = "-100%";
                     window.location.href = "userRoles.html";

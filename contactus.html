@@ -11,104 +11,115 @@
     <style>
         :root {
             --primary: #0d6efd;
+            --secondary: #6c757d;
+            --success: #198754;
+            --light: #f8f9fa;
+            --dark: #212529;
             --med-blue: #1a76d1;
             --light-blue: #e3f2fd;
-            --dark: #212529;
-            --light: #f8f9fa;
         }
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            min-height: 100vh;
             color: #333;
+            background-color: #f9fbfd;
         }
         
-        .contact-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        .contact-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
         
         .contact-card {
-            background: white;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
+            background: white;
         }
         
         .contact-card:hover {
             transform: translateY(-10px);
         }
         
-        .contact-header {
+        .contact-info {
             background: linear-gradient(135deg, var(--med-blue) 0%, var(--primary) 100%);
             color: white;
             padding: 40px;
-            text-align: center;
+            height: 100%;
         }
         
-        .contact-header h1 {
+        .contact-info h3 {
+            font-weight: 700;
+            margin-bottom: 30px;
             font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            margin-bottom: 15px;
-            font-size: 2.5rem;
         }
         
-        .contact-header p {
-            font-size: 1.1rem;
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .contact-details p {
+            margin-bottom: 0;
             opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
+        }
+        
+        .contact-hours {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
         }
         
         .contact-form {
             padding: 40px;
         }
         
-        .form-group {
-            margin-bottom: 25px;
+        .form-control, .form-select {
+            border: 2px solid #e9ecef;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
         }
         
         .form-label {
             font-weight: 500;
             margin-bottom: 8px;
             color: var(--dark);
-            display: block;
-        }
-        
-        .form-control {
-            border: 2px solid #e9ecef;
-            padding: 15px;
-            border-radius: 10px;
-            width: 100%;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-            outline: none;
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
         }
         
         .btn-send {
             background: linear-gradient(135deg, var(--med-blue) 0%, var(--primary) 100%);
             border: none;
-            padding: 15px 30px;
+            padding: 12px 30px;
             font-weight: 600;
-            border-radius: 10px;
+            border-radius: 8px;
             transition: all 0.3s;
-            color: white;
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: block;
             width: 100%;
             margin-top: 10px;
         }
@@ -118,60 +129,64 @@
             box-shadow: 0 7px 15px rgba(13, 110, 253, 0.3);
         }
         
-        .contact-info {
-            background: var(--light-blue);
+        .contact-image {
             border-radius: 10px;
-            padding: 25px;
-            margin-top: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            height: 100%;
         }
         
-        .contact-info h3 {
+        .contact-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
             font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
             color: var(--primary);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
         }
         
-        .info-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-        
-        .info-icon {
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
             background: var(--primary);
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
         
-        .info-content h4 {
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--dark);
-        }
-        
-        .info-content p {
-            margin: 0;
-            color: #555;
+        .section-title p {
+            color: var(--secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
         }
         
         /* Success message */
         #successMessage {
             display: none;
-            background: #198754;
+            background: var(--success);
             color: white;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
             margin-top: 20px;
             animation: fadeIn 0.5s;
+            position: fixed;
+            top: 0;
         }
         
         @keyframes fadeIn {
@@ -180,111 +195,159 @@
         }
         
         /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .contact-header {
-                padding: 30px 20px;
+        @media (max-width: 991px) {
+            .contact-info {
+                padding: 30px;
             }
-            
             .contact-form {
-                padding: 30px 20px;
+                padding: 30px;
             }
-            
-            .contact-header h1 {
-                font-size: 2rem;
+        }
+        
+        @media (max-width: 767px) {
+            .contact-section {
+                padding: 60px 0;
+            }
+            .contact-image {
+                height: 300px;
+                margin-bottom: 30px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header Placeholder -->
+    <div id="header_box"></div>
+
     <!-- Contact Section -->
-    <section id="contact" class="py-5">
-        <div class="contact-container">
-            <div class="contact-card">
-                <div class="contact-header" data-aos="fade-down">
-                    <h1>Contact MediCare Pro</h1>
-                    <p>Have questions or need assistance? Our team is ready to help you with any inquiries. Reach out to us today.</p>
-                </div>
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Get In Touch</h2>
+                <p>Have questions or need assistance? Our team is ready to help you with any inquiries.</p>
+            </div>
+            
+            <div class="row m-auto">
+                <!-- <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
+                    <div class="contact-card h-100">
+                        <div class="contact-info">
+                            <h3>Contact Information</h3>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Our Location</h4>
+                                    <p>123 Medical Drive, Health City, HC 12345</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Phone Number</h4>
+                                    <p>+1 (123) 456-7890</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Email Address</h4>
+                                    <p>info@medicare.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h4>Customer Support</h4>
+                                    <p>support@medicare.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-hours">
+                                <h4><i class="far fa-clock me-2"></i> Working Hours</h4>
+                                <p>Mon-Fri: 8:00 AM - 7:00 PM</p>
+                                <p>Sat-Sun: 9:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
                 
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group" data-aos="fade-right" data-aos-delay="100">
-                            <label for="name" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="John Smith" required>
-                        </div>
-                        
-                        <div class="form-group" data-aos="fade-right" data-aos-delay="150">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
-                        </div>
-                        
-                        <div class="form-group" data-aos="fade-right" data-aos-delay="200">
-                            <label for="subject" class="form-label">Subject</label>
-                            <input type="text" class="form-control" id="subject" placeholder="How can we help you?" required>
-                        </div>
-                        
-                        <div class="form-group" data-aos="fade-right" data-aos-delay="250">
-                            <label for="message" class="form-label">Your Message</label>
-                            <textarea class="form-control" id="message" placeholder="Type your message here..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn-send" data-aos="fade-up" data-aos-delay="300">
-                            <i class="fas fa-paper-plane me-2"></i> Send Message
-                        </button>
-                        
-                        <div id="successMessage">
-                            <i class="fas fa-check-circle fa-2x mb-3"></i>
-                            <h3>Message Sent Successfully!</h3>
-                            <p>Thank you for contacting us. We'll get back to you shortly.</p>
-                        </div>
-                    </form>
-                    
-                    <div class="contact-info" data-aos="fade-up" data-aos-delay="400">
-                        <h3>Contact Information</h3>
-                        
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="info-content">
-                                <h4>Our Location</h4>
-                                <p>123 Medical Drive, Health City, HC 12345</p>
-                            </div>
-                        </div>
-                        
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <div class="info-content">
-                                <h4>Phone Number</h4>
-                                <p>+1 (123) 456-7890</p>
-                            </div>
-                        </div>
-                        
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="info-content">
-                                <h4>Email Address</h4>
-                                <p>info@medicare.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="far fa-clock"></i>
-                            </div>
-                            <div class="info-content">
-                                <h4>Working Hours</h4>
-                                <p>Mon-Fri: 8:00 AM - 7:00 PM<br>Sat-Sun: 9:00 AM - 5:00 PM</p>
-                            </div>
+                <div class="col-lg-7  m-auto" data-aos="fade-left">
+                    <div class="contact-card">
+                        <div class="contact-form">
+                            <h3 class="mb-4">Send Us a Message</h3>
+                            
+                            <form id="contactForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" id="name" placeholder="John Smith" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="phone" class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" id="phone" placeholder="(123) 456-7890">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="subject" class="form-label">Subject</label>
+                                            <select class="form-select" id="subject" required>
+                                                <option value="" disabled selected>Select a subject</option>
+                                                <option value="appointment">Book Appointment</option>
+                                                <option value="billing">Billing Inquiry</option>
+                                                <option value="medical">Medical Question</option>
+                                                <option value="feedback">Feedback/Suggestion</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Your Message</label>
+                                    <textarea class="form-control" id="message" rows="5" placeholder="Type your message here..." required></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-send">
+                                    <i class="fas fa-paper-plane me-2"></i> Send Message
+                                </button>
+                                
+                                <div id="successMessage">
+                                    <i class="fas fa-check-circle fa-3x mb-3"></i>
+                                    <h4>Message Sent Successfully!</h4>
+                                    <p>Thank you for contacting us. We'll get back to you shortly.</p>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+  
     </section>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -292,7 +355,7 @@
         // Initialize AOS
         document.addEventListener('DOMContentLoaded', function() {
             AOS.init({
-                duration: 800,
+                duration: 1000,
                 once: true
             });
             
@@ -303,24 +366,10 @@
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Simple validation
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const subject = document.getElementById('subject').value;
-                const message = document.getElementById('message').value;
-                
-                if (!name || !email || !subject || !message) {
-                    alert('Please fill in all fields');
-                    return;
-                }
-                
                 // Simulate form submission
                 setTimeout(function() {
                     // Show success message
                     successMessage.style.display = 'block';
-                    
-                    // Scroll to success message
-                    successMessage.scrollIntoView({ behavior: 'smooth' });
                     
                     // Reset form after 5 seconds
                     setTimeout(function() {
