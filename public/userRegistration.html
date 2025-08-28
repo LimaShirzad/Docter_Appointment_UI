@@ -24,7 +24,7 @@
             </div>
             
             <div class="form-body">
-                <form id="registrationForm">
+                <form id="registrationForm" enctype="multipart/form-data">
                     <div class="form-grid">
                         <div class="left-column">
                             <!-- Personal Information Section -->
@@ -38,7 +38,7 @@
                                     <label for="firstName" class="form-label">
                                         <i class="fas fa-signature"></i>First Name
                                     </label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name" >
                                     <span id="msg" class="p-1 text-danger"></span>
                                 </div>
                                 
@@ -46,7 +46,7 @@
                                     <label for="lastName" class="form-label">
                                         <i class="fas fa-signature"></i>Last Name
                                     </label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name" >
                                  <span id="msg" class="p-1 text-danger"></span>
                                 </div>
                                 
@@ -54,7 +54,7 @@
                                     <label for="email" class="form-label">
                                         <i class="fas fa-envelope"></i>Email Address
                                     </label>
-                                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" >
                                 <span id="msg" class="p-1 text-danger"></span>
                                 </div>
                                 
@@ -62,23 +62,16 @@
                                     <label class="form-label">
                                         <i class="fas fa-venus-mars"></i>Gender
                                     </label>
-                                    <div class="gender-container">
-                                        <div class="gender-option" data-value="male">
-                                            <i class="fas fa-male"></i>
-                                            <div>Male</div>
-                                        </div>
-                                        <div class="gender-option" data-value="female">
-                                            <i class="fas fa-female"></i>
-                                            <div>Female</div>
-                                        </div>
-                                      
 
-                                        
+                               
+                                <div class="gender-container">
 
-                                        
-                                    </div>
+                                    <label for=""> Male <input type="radio" class="form-check-input"   value="MALE" name="gender" checked></label>
+                                    <label for=""> Female <input type="radio" class="form-check-input" value="FEMALE"name="gender" ></label>
+    
+                                 </div>
 
-                                    
+                        
                                 </div>
 
 
@@ -117,7 +110,7 @@
                                     <label for="username" class="form-label">
                                         <i class="fas fa-user-circle"></i>Username
                                     </label>
-                                    <input type="text" class="form-control" id="username" placeholder="Choose a username" required>
+                                    <input type="text" class="form-control" id="username" name="userName" placeholder="Choose a username" >
                                 <span id="msg" class="p-1 text-danger"></span>
                                 </div>
                                 
@@ -125,8 +118,8 @@
                                     <label for="role" class="form-label">
                                         <i class="fas fa-user-tag"></i>Role
                                     </label>
-                                    <select class="form-select" id="role" required>
-                                        <option value="" selected disabled>Select your role</option>
+                                    <select class="form-select" id="role" name="role">
+                                        <option value="" selected disabled >Select your role</option>
                              
                                     </select>
                                      <span id="msg" class="p-1 text-danger"></span>
@@ -137,7 +130,7 @@
                                         <i class="fas fa-key"></i>Password
                                     </label>
                                     <div class="password-container">
-                                        <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" >
                                         <span class="password-toggle" id="passwordToggle">
                                             <i class="fas fa-eye"></i>
                                         </span>
@@ -156,6 +149,8 @@
                     </div>
 
 
+
+
                              <div class="form-section" id="Photo"> 
                                
                                  <div class="profile-pic-container"> 
@@ -163,8 +158,8 @@
                                         <i class="fas fa-user-plus"></i>
                                         <img id="previewImage" src="" alt="Preview">
                                     </div>
-                                    <input type="file" class="form-control d-none" id="profilePic" accept="image/*">
-                                    <button type="button" class="btn btn-outline-primary" id="uploadBtn" >
+                                    <input type="file" class="form-control " id="profilePic" name="profilePicture" accept="image/*">
+                                    <button type="button" class="btn btn-outline-primary" >
                                         <i class="fas fa-cloud-upload-alt me-2" ></i>Upload Photo
                                     </button>
                                 </div> 

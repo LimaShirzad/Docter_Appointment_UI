@@ -22,7 +22,7 @@
     <div class="specialty-container mt-5">
         <div class="specialty-card">
             <div class="specialty-header">
-                <h1 class="specialty-title">Add Medical Specialty</h1>
+                <h1 class="specialty-title">update Medical Specialty</h1>
                 <p class="specialty-subtitle">Create new specialties for doctor appointments</p>
             </div>
             
@@ -31,23 +31,21 @@
             </div>
             
             <div class="specialty-body">
-                <form id="specialty_form" class="specialty_form">
+                <form id="update_specialty_form" class="specialty_form">
+                    <input type="hidden" id="id" name="id" >
                     <div class="specialty-form-group">
                         <label for="specialty_name" class="specialty-label">Specialty Name</label>
                         <input 
                             type="text" 
                             id="title" 
                             class="specialty-input" 
-                            name="title"
-                            placeholder="Enter medical specialty (e.g. Cardiology, Neurology)" 
-                            
-                        >
+                            name="title">
 
                         <span id="msg" class="text-danger fw-bold"></span>
                     </div>
                     
                     <button type="submit" class="specialty-btn">
-                        <i class="fas fa-plus-circle"></i> Add Specialty
+                        <i class="fas fa-plus-circle"></i> update Specialty
                     </button>
                 </form>
                 
@@ -63,80 +61,9 @@
            
    <div id="msg_box" class="card"></div>
                    
-               
-        
-
-
- <script>
-
-
-const specialtySaveForm=document.getElementById("specialty_form");
-
-const saveSpecialtyData_URL=("http://localhost:8080/api/specialty/save");
-
-const msgBox=document.getElementById("msg_box");
-
-const errmsg=document.getElementById("msg");
-
-specialtySaveForm.addEventListener('submit',async e =>{
-
-    e.preventDefault();
-
-    const title=document.getElementById("title").value;
-
-    errmsg.innerText=" ";
-
-    const res=await fetch(saveSpecialtyData_URL,{
-
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-
-            body: JSON.stringify({title: title})
-
-  });
-
-    const data=await res.json();
-    console.log(data);
-
-    if(!res.ok){
-     if(data.errors && data.errors.title)
-     {
-          errmsg.innerText=data.errors.title;
-     }
-     else if(data.message){
-
-        errmsg.innerText=data.message;
-
-     }
-    }else{
-         
-          msgBox.innerText = "New Specialty Added Successfully"; //  shows success message
-                msgBox.style.right=0;
-                msg.innerText="";
-
-                specialtySaveForm.reset();
-     }
-   
-      setInterval(() => {
-
-                msgBox.style.right="-100%";
-
-                
-      }, 4000);
-
-
-    
-
-});
-    
-
-</script> 
-
-
-<!-- <script src="assets/js/comman.js"></script> -->
 <script src="assets/js/app.js"></script>
+
 <script src="assets/js/dashbord.js"></script>
+
 </body>
 </html>

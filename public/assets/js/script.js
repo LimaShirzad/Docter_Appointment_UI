@@ -2,8 +2,6 @@
      // Password toggle functionality
      const passwordToggle = document.getElementById('passwordToggle');
      const passwordField = document.getElementById('password');
-     const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
-     const confirmPasswordField = document.getElementById('confirmPassword');
      
      function togglePasswordVisibility(field, toggle) {
   if (field.type === 'password') {
@@ -16,12 +14,10 @@
      }
      
      passwordToggle.addEventListener('click', function() {
-  togglePasswordVisibility(passwordField, passwordToggle);
+        togglePasswordVisibility(passwordField, passwordToggle);
      });
      
-     confirmPasswordToggle.addEventListener('click', function() {
-  togglePasswordVisibility(confirmPasswordField, confirmPasswordToggle);
-     });
+ 
      
      // Profile picture upload
      const profilePicPreview = document.getElementById('profilePicPreview');

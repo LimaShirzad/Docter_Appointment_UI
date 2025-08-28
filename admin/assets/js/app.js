@@ -1,11 +1,14 @@
 // =====================role form save part start======================
+
+// document.addEventListener("DOMContentLoaded", async () => {
+
 const form=document.getElementById("RoleForm");
 const msg=document.getElementById("msg");
 const cancelBtn=document.getElementById("role_cancel_btn");
 
 const msgBox=document.getElementById("msg_box");
 
-
+if(form){
 form.addEventListener('submit',async e =>{
 
     e.preventDefault();
@@ -57,13 +60,13 @@ form.addEventListener('submit',async e =>{
             }, 5000);
 
 
-
-});
-
 cancelBtn.addEventListener('click',function()
 {
  form.reset();
 });
+});
+
+}
 
 
 
@@ -190,9 +193,188 @@ async function deleteRole(id)
 }
 // ==============================delete Role end=============================
 
-// =======================update role satrt=====================
+
+
+// =======================load addSpecialty  start=====================
+
+    
+ let currentPage=0;
+
+ let pageSize=3;
+
+  async function loadSpecialty(page) {
+
+                    const res=await fetch('http://localhost:8080/api/specialty/all?page='+page + "&size="+pageSize);
+
+                    const data=await res.json();
+
+                    let tbody=document.querySelector("#specialtyTable tbody");
+
+                    tbody.innerHTML="";
+
+                    data.content.forEach(specialty => {
+
+                        let row=`<tr>
+                                     <td>${specialty.id}</td>
+                                     <td>${specialty.title}</td>
+
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-warning me-1" onclick="window.location.href='updateSpecialty.html?id=${specialty.id}'"><i class="fas fa-edit"></i></button>
+                                                <button class="btn btn-sm btn-outline-danger" onclick="deleteSpecialty(${specialty.id})"><i class="fas fa-trash"></i></button>
+                                            </td>
+                            
+                            
+                            </tr>`;
+
+                            tbody.innerHTML+=row;
+                        
+                    });
+
+
+                    let pageDiv=document.querySelector(".pagination");
+                    pageDiv.innerHTML="";
+
+                    for(let i=0;i<data.totalPages;i++){
+
+                        // pageDiv.innerHTML+=`<button  class="page-item" onclick="loadUser(${i})">${i+1}</button>`;
+
+                         pageDiv.innerHTML+= `<li class="page-item  page-link" onclick="loadSpecialty(${i})">${i+1}</li>`;
+
+
+                    }
+
+ 
+    }
+
+
+loadSpecialty(currentPage);
+
+async function deleteSpecialty(id){
+
+
+    if(!id) return alert("invalid id");
+
+
+     const confirm=await customConfirm("are you sure to Delete the Specialty");
+     if(!confirm) return;
+
+
+
+     const res=await fetch(`http://localhost:8080/api/specialty/${id}`,{method : 'DELETE'});
+
+    if(res.ok)
+    {
+       
+        customAlert("Specialty Deleted successfully!", "success");
+loadSpecialty(currentPage);
+
+   
+    }else{
+        const error=await res.json();
+
+        customAlert(error.error || 'failed');
+
+    }
+
+}
+// =======================load ddSpecialty  end=======================
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+       
+    const updateSpecialtyForm=document.getElementById("update_specialty_form");
+    const title=document.getElementById("title");
+    const specialtyIdInput=document.getElementById("id");
 
 
 
 
-// =======================update role end=======================
+    const specialty_id=new URLSearchParams(window.location.search).get("id");
+
+    const getSpecialty_URL=`http://localhost:8080/api/specialty/${specialty_id}`;
+
+   
+    if (!specialty_id) {
+
+        // msg.innerHTML="";
+        msg.innerText = "No Specialty ID provided!";
+        msg.style.color = "red";
+        return;
+    }
+
+
+    try{
+        const res = await fetch(getSpecialty_URL);
+        if (!res.ok) throw new Error("Failed to load Speclaity");
+
+        const data = await res.json();
+        title.value = data.title;  
+        specialtyIdInput.value = data.id;  
+
+    }catch {
+        msg.innerText = "Error loading Specialty!";
+        msg.style.color = "red";
+        return;
+    }
+   
+
+
+          
+ updateSpecialtyForm.onsubmit = async e => {
+
+                    e.preventDefault();
+
+                       msg.innerText = "";
+                       msgBox.innerText = "";
+                       const updateSpecialty_URL=(`http://localhost:8080/api/specialty/${specialty_id}`);
+
+                    
+        try {
+            const res = await fetch(updateSpecialty_URL,{
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title: title.value })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                let errorMessage = "";
+                if (data.errors) {
+                    for (const field in data.errors) {
+                        errorMessage += `${data.errors[field]} `;
+                    }
+                }
+                if (data.message) {
+                    errorMessage += data.message;
+                }
+                msg.innerText = errorMessage || "Update failed!";
+                msg.style.color = "red";
+            } else {
+                msgBox.innerText = "Specialty Updated Successfully!";
+                msgBox.style.right = "0";
+                window.location.href = "specialties.html";
+
+                setTimeout(() => {
+                    msgBox.style.right = "-100%";
+                    window.location.href = "specialties.html";
+                }, 3000);
+            }
+
+        } catch {
+            msg.innerText = "Network error!";
+            msg.style.color = "red";
+        }
+
+                    
+
+
+                   
+                  
+
+
+           }
+
+        
+});
+
