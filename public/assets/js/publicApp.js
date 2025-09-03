@@ -5,7 +5,7 @@ async function loadRoles() {
 
             const roles=await res.json();
 
-            const select=document.getElementById("role");
+            const select=document.getElementById("roleId");
             roles.forEach(role => {
                 const option = document.createElement('option');
                 option.value = role.id;        // <-- correct numeric ID
@@ -21,39 +21,6 @@ loadRoles();
 
 // ======================== start of saving user information ================
 
-
-
-let saveUrl="http://localhost:8080/api/user/save";
-document.getElementById("registrationForm").addEventListener('submit',async function(e)
-{
-
-        e.preventDefault();
-
-        const formData=new FormData(this);
-
-        const response= await fetch(saveUrl,{
-
-                method: "POST",
-                body: formData
-
-
-        }).then(async res=>{
-                if(!res.ok)
-                {
-                    const errors=await res.json();
-                    console.log(errors);
-                    return;
-                }
-                return res.json();
-        }).then(data=>console.log(data));
-
-        // return res.json();)
-
-        // const data=await response.json();
-        // console.log(data);
-
-
-});
 
 
 
