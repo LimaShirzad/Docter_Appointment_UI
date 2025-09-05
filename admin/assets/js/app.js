@@ -1,14 +1,18 @@
 // =====================role form save part start======================
 
-// document.addEventListener("DOMContentLoaded", async () => {
 
 const form=document.getElementById("RoleForm");
 const msg=document.getElementById("msg");
+
+
 const cancelBtn=document.getElementById("role_cancel_btn");
 
 const msgBox=document.getElementById("msg_box");
 
 if(form){
+
+    msg.innerText="";
+
 form.addEventListener('submit',async e =>{
 
     e.preventDefault();
@@ -67,7 +71,6 @@ cancelBtn.addEventListener('click',function()
 });
 
 }
-
 
 
 // =====================role form save part end======================
@@ -280,7 +283,7 @@ loadSpecialty(currentPage);
 // =======================load ddSpecialty  end=======================
 
 document.addEventListener("DOMContentLoaded", async () => {
-
+ msg.innerHTML="";
        
     const updateSpecialtyForm=document.getElementById("update_specialty_form");
     const title=document.getElementById("title");

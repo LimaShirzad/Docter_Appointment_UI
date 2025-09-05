@@ -22,10 +22,16 @@
                         <h3 class="text-center mb-4">Blood Group Information</h3>
                         <p class="text-center text-muted mb-4">Please provide your blood group for better healthcare service</p>
                         
-                        <form>
+                        <form id="savePatientForm">
                             <div class="mb-4">
+
+                                <input type="hidden" name="userId" id="userId" >
+
                                 <label class="form-label"><i class="fas fa-tint blood-drop"></i>Select Your Blood Group</label>
-                               <input type="text " class="form-control">
+                               <input type="text" class="form-control" name="bloodGroup" id="bloodGroup">
+
+                                <span id="msg"></span>
+
                             </div>
                             
                             <button type="submit" class="btn btn-submit mt-2">
@@ -47,6 +53,119 @@
         </div>
     </div>
 
+
+    <div id="box">
+       <div id="public_msg_box" class="card">
+
+        <h3>Acount Created</h3>
+
+        <p id="success-msg"></p>
+
+       
+
+       </div>
+   </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <script>
+
+                const param=new URLSearchParams(window.location.search);
+                const id=param.get("id");
+                let userId=document.getElementById("userId");
+
+                userId.value=id;
+
+                let savePatientForm=document.getElementById("savePatientForm");
+
+                let msgBox=document.getElementById("box");
+                let success_msg=document.getElementById("success-msg");
+
+
+                
+                const savePatientForm_URL=`http://localhost:8080/api/patient/save`;
+
+savePatientForm.addEventListener('submit', async e => {
+    e.preventDefault();
+ 
+
+    const bloodGroup = savePatientForm.bloodGroup.value;
+    const userIdValue = savePatientForm.userId.value;
+
+    let msg=document.getElementById("msg");
+
+    // const bloodGroup=document.getElementById("bloodGroup").value;
+
+    // const userIdValue=document.getElementById("userId").value;
+
+    
+
+
+
+   
+    const payload = {
+        bloodGroup: bloodGroup,
+        userId: parseInt(userIdValue)
+    };
+
+  
+
+    try {
+        const response = await fetch('http://localhost:8080/api/patient/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify(payload)
+        });
+
+
+
+         const data = await response.json();
+
+
+
+           if (!response.ok) {
+            if (data.errors && data.errors.bloodGroup) {
+                msg.innerText = data.errors.bloodGroup; 
+                msg.style.color="red";
+            } else if (data.message) {
+                msg.innerText = data.message; 
+                msg.style.color="red";
+
+            }
+
+            } else {
+                success_msg.innerText = data.success;
+                msgBox.style.display="flex";
+                msg.innerText="";
+
+                savePatientForm.reset();
+
+            }
+       
+            } catch (error) {
+                console.error("Fetch error:", error);
+            }
+
+
+             setInterval(() => {
+                msgBox.style.display="none";
+
+                
+            }, 5000);
+
+});
+
+
+
+
+
+
+
+    </script>
+
 </body>
 </html>

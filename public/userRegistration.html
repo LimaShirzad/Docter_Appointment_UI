@@ -39,7 +39,7 @@
                                         <i class="fas fa-signature"></i>First Name
                                     </label>
                                     <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name" >
-                                    <span id="msg" class="p-1 text-danger"></span>
+                                    <span  class="msg_err form-top-err"></span>
                                 </div>
                                 
                                 <div class="mb-4">
@@ -47,7 +47,7 @@
                                         <i class="fas fa-signature"></i>Last Name
                                     </label>
                                     <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name" >
-                                 <span id="msg" class="p-1 text-danger"></span>
+                                 <span  class="msg_err form-top-err"></span>
                                 </div>
                                 
                                 <div class="mb-4">
@@ -55,7 +55,7 @@
                                         <i class="fas fa-envelope"></i>Email Address
                                     </label>
                                     <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" >
-                                <span id="msg" class="p-1 text-danger"></span>
+                                <span  class="msg_err form-top-err"></span>
                                 </div>
                                 
                                 <div class="mb-4">
@@ -111,7 +111,7 @@
                                         <i class="fas fa-user-circle"></i>Username
                                     </label>
                                     <input type="text" class="form-control" id="username" name="userName" placeholder="Choose a username" >
-                                <span id="msg" class="p-1 text-danger"></span>
+                                <span  class="msg_err form-top-err"></span>
                                 </div>
                                 
                                 <div class="mb-4 ">
@@ -122,7 +122,7 @@
                                         <option value="" selected disabled >Select your role</option>
                              
                                     </select>
-                                     <span id="msg" class="p-1 text-danger"></span>
+                                     <span  class="msg_err form-top-err"></span>
                                 </div>
                                 
                                 <div class="mb-4">
@@ -134,7 +134,7 @@
                                         <span class="password-toggle" id="passwordToggle">
                                             <i class="fas fa-eye"></i>
                                         </span>
-                                         <span id="msg" class="p-1 text-danger"></span>
+                                         <span  class= "msg_err"></span>
                                     </div>
                                 </div>
                                 
@@ -182,28 +182,46 @@
     <script src="assets/js/publicApp.js"></script>
 
 <script>
-    // assets/js/publicApp.js
 
 
-document.getElementById("registrationForm").addEventListener("submit", async function (e) {
-    e.preventDefault(); // Prevent normal form submit
+
+
+
+document.getElementById("registrationForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
     const form = e.target;
-    const formData = new FormData(form); // all inputs + file (image) included
 
-    // try {
+    const formData = new FormData(form);
+
+    try {
         const response = await fetch("http://localhost:8080/api/user/save", {
             method: "POST",
             body: formData
         });
 
-        const result = await response.json();
+        const data = await response.json();
 
-        console.log(result);
 
+        console.log(data.user);
+        if(data.user.roleId==1)
+        {
+                window.location.href=`doctorForm.html?id=${data.user.id}`;
+        }else if(data.user.roleId==72){
+
+              window.location.href=`patientForm.html?id=${data.user.id}`;
+
+        }
+        
+        
+    } catch (err) {
+
+        
+      
+    }
 });
-</script>
 
+</script>
 
 
 </body>
