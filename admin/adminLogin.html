@@ -332,9 +332,11 @@
                 height: auto;
                 margin: 40px auto;
             }
+            
 
             .banner {
                 padding: 30px 20px;
+                display: none;
             }
 
             .banner h2 {
@@ -545,6 +547,58 @@
                 this.parentElement.querySelector('i').style.color = '#a0aec0';
             });
         });
+
+
+
+
+
+
+
+// ================================================================================
+
+
+document.getElementById("loginForm").addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const res = await fetch("http://localhost:8080/api/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+    });
+
+    if(res.ok){
+        const data = await res.json();
+        localStorage.setItem("token", data.token);
+        window.location.href = "dashboard.html"; // login successful → dashboard
+    } else {
+        alert("Login failed");
+    }
+});
+
+
+
+
+
+
+
+// ==================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>

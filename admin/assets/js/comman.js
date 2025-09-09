@@ -1,74 +1,32 @@
-//  document.querySelector('.menu-toggle').addEventListener('click', function() {
-//             document.querySelector('.sidebar').classList.toggle('active');
-//         });
-        
-//         // Navigation between pages
-//         document.querySelectorAll('.sidebar-menu a').forEach(link => {
-//             link.addEventListener('click', function(e) {
-//                 e.preventDefault();
-                
-//                 // Remove active class from all links
-//                 document.querySelectorAll('.sidebar-menu a').forEach(item => {
-//                     item.classList.remove('active');
-//                 });
-                
-//                 // Add active class to clicked link
-//                 this.classList.add('active');
-                
-//                 // Hide all pages
-//                 document.querySelectorAll('.page').forEach(page => {
-//                     page.classList.remove('active');
-//                 });
-                
-//                 // Show the selected page
-//                 const pageId = this.getAttribute('data-page');
-//                 document.getElementById(pageId).classList.add('active');
-                
-//                 // Close sidebar on mobile after selection
-//                 if (window.innerWidth < 992) {
-//                     document.querySelector('.sidebar').classList.remove('active');
-//                 }
-//  });
-   
-          
-           
-// });
+async function checkAuth() {
+    const token = localStorage.getItem("token");
 
+    if(!token){
+        // که JWT موجود نه وي → Login page ته redirect
+        window.location.href = "adminLogin.html";
+        return;
+    }
 
-// document.addEventListener("DOMContentLoaded",function()
+    // JWT شته، نو Data fetch کوه
+    try {
+        const res = await fetch("http://localhost:8080/api/dashboard", {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
 
+        if(res.status === 401){
+            // JWT invalid یا expired → Login page ته redirect
+            window.location.href = "login.html";
+        } else {
+            const data = await res.json();
+            console.log("Dashboard Data:", data);
+            // دلته د Dashboard DOM update کوه
+        }
+    } catch (err) {
+        console.error("Error fetching dashboard data", err);
+        window.location.href = "adminLogin.html";
+    }
+};
 
-// {
-
-
-
-//  document.getElementById('menu-toggle').addEventListener('click', function() {
-//             document.querySelector('.sidebar').classList.toggle('active');
-//         });
-        
-//         // Navigation between pages
-//         document.querySelectorAll('.sidebar-menu a').forEach(link => {
-//             link.addEventListener('click', function(e) {
-//                 e.preventDefault();
-                
-//                 // Remove active class from all links
-//                 document.querySelectorAll('.sidebar-menu a').forEach(item => {
-//                     item.classList.remove('active');
-//                 });
-                
-//                 // Add active class to clicked link
-//                 this.classList.add('active');
-                
-             
-//                 });
-                
-            
-//                 // Close sidebar on mobile after selection
-//                 if (window.innerWidth < 992) {
-//                     document.querySelector('.sidebar').classList.remove('active');
-//                 }
-//  });
-   
-// });
-
-
+checkAuth();

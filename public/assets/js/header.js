@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home">Home</a>
+                        <a class="nav-link active" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
@@ -24,6 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
                   
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+
+                      <li class="nav-item">
+                        <a class="nav-link" href="login.html">Sing in</a>
                     </li>
                 </ul>
                 <div class="ms-lg-3 mt-3 mt-lg-0">

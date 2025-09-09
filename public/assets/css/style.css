@@ -467,6 +467,7 @@
             height: 55px;
             width: 100%;
             background: white;
+            position: relative;
         }
         
         .form-control:focus, .form-select:focus, .form-date:focus {

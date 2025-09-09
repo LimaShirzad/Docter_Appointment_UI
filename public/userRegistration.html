@@ -187,39 +187,39 @@
 
 
 
-document.getElementById("registrationForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
+// document.getElementById("registrationForm").addEventListener("submit", async function(e) {
+//     e.preventDefault();
 
-    const form = e.target;
+//     const form = e.target;
 
-    const formData = new FormData(form);
+//     const formData = new FormData(form);
 
-    try {
-        const response = await fetch("http://localhost:8080/api/user/save", {
-            method: "POST",
-            body: formData
-        });
+//     try {
+//         const response = await fetch("http://localhost:8080/api/user/save", {
+//             method: "POST",
+//             body: formData
+//         });
 
-        const data = await response.json();
+//         const data = await response.json();
 
 
-        console.log(data.user);
-        if(data.user.roleId==1)
-        {
-                window.location.href=`doctorForm.html?id=${data.user.id}`;
-        }else if(data.user.roleId==72){
+//         console.log(data.user);
+//         if(data.user.roleId==1)
+//         {
+//                 window.location.href=`doctorForm.html?id=${data.user.id}`;
+//         }else if(data.user.roleId==72){
 
-              window.location.href=`patientForm.html?id=${data.user.id}`;
+//               window.location.href=`patientForm.html?id=${data.user.id}`;
 
-        }
+//         }
         
         
-    } catch (err) {
+//     } catch (err) {
 
         
       
-    }
-});
+//     }
+// });
 
 </script>
 

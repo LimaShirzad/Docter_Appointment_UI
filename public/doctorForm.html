@@ -21,19 +21,24 @@
                 <i class="fas fa-stethoscope"></i>
             </div> -->
             
-            <form >
+            <form id="saveDoctorForm" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="doctor-input-group">
                             <i class="fas fa-graduation-cap"></i>
-                            <input type="text" class="form-control" id="education" placeholder="Education (e.g. MBBS, MD)" required>
+
+                            <input type="hidden" name="userId" id="userId">
+                            <input type="text" class="form-control" id="education" name="education" placeholder="Education (e.g. MBBS, MD)" >
+                            <span class="err_msg text-danger"></span>
                         </div>
+                        
                     </div>
-                    
                     <div class="col-md-6">
                         <div class="doctor-input-group">
                             <i class="fas fa-university"></i>
-                            <input type="text" class="form-control" id="university" placeholder="University Name" required>
+                            <input type="text" class="form-control" id="universityName" name="universityName" placeholder="University Name" >
+                            <span class="err_msg text-danger "></span>
+
                         </div>
                     </div>
                 </div>
@@ -42,59 +47,52 @@
                     <div class="col-md-6">
                         <div class="doctor-input-group date-container">
                             <i class="fas fa-calendar-alt"></i>
-                            <input type="date" class="form-control form-date" id="graduationDate" required>
+                            <input type="date" class="form-control form-date" id="graduationYear" name="graduationYear" >
+                            <span class="err_msg text-danger"></span>
+
                         </div>
                     </div>
                     
                     <div class="col-md-6">
                         <div class="doctor-input-group">
                             <i class="fas fa-briefcase"></i>
-                            <select class="form-select" id="experienceYears" required>
-                                <option value="" selected disabled>Years of Experience</option>
-                                <option value="1">1 year</option>
-                                <option value="2">2 years</option>
-                                <option value="3">3 years</option>
-                                <option value="4">4 years</option>
-                                <option value="5">5 years</option>
-                                <option value="6">6 years</option>
-                                <option value="7">7 years</option>
-                                <option value="8">8 years</option>
-                                <option value="9">9 years</option>
-                                <option value="10">10+ years</option>
-                            </select>
+                         
+                            <input type="number" class="form-control form-date" id="experienceYear"  name="experienceYear" placeholder="Experience Year">
+                            <span class="err_msg text-danger "></span>
+
+
+
                         </div>
                     </div>
                 </div>
                 
                 <div class="doctor-input-group">
                     <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" class="form-control" id="address" placeholder="Address" required>
+                    <input type="text" class="form-control" id="address" name="address"  placeholder="Address" >
+                    <span class="err_msg text-danger "></span>
+
                 </div>
                 
                 <div class="doctor-input-group">
-                    <i class="fas fa-heartbeat"></i>
-                    <select class="form-select" id="specialty" required>
-                        <option value="" selected disabled>Medical Specialty</option>
-                        <option value="1">Cardiology</option>
-                        <option value="2">Dermatology</option>
-                        <option value="3">Neurology</option>
-                        <option value="4">Pediatrics</option>
-                        <option value="5">Orthopedics</option>
-                        <option value="6">Ophthalmology</option>
-                        <option value="7">Psychiatry</option>
-                        <option value="8">Surgery</option>
-                        <option value="9">Radiology</option>
-                        <option value="10">Emergency Medicine</option>
+                    <!-- <i class="fas fa-heartbeat"></i> -->
+                    <label for="">Medical Specialty</label>
+                    <select class="form-select" id="specialtyId" name="specialtyId">
+
+                        <option value="" selected disabled >Select Specialty</option>
+                       
+                      
                     </select>
                 </div>
                 
                 <div class="doctor-file-upload">
-                    <input type="file" class="doctor-file-upload-input" id="cv" accept=".pdf" required>
+                    <input type="file" class="doctor-file-upload-input" id="cv" name="cv" accept=".pdf" >
                     <label for="cv" class="doctor-file-upload-label">
                         <i class="fas fa-cloud-upload-alt"></i>
                         <span>Upload CV (PDF, max 5MB)</span>
                     </label>
                     <div class="form-text">Selected file: <span id="fileName">None</span></div>
+                            <span class="err_msg text-danger mt-4 p-2"></span>
+
                 </div>
                 
                 <div class="doctor-btn-group">
@@ -107,67 +105,93 @@
         </div>
     </div>
 
-    <script>
-        // File upload display
-        document.getElementById('cv').addEventListener('change', function(e) {
-            const fileName = e.target.files[0] ? e.target.files[0].name : 'None';
-            document.getElementById('fileName').textContent = fileName;
-        });
+
+        <div id="box">
+       <div id="public_msg_box" class="card">
+
+        <h3>Acount Created</h3>
+
+        <p id="success-msg"></p>
+
+       
+
+       </div>
+   </div>
+
+ 
+    
+    <script src="assets/js/publicApp.js"></script>
+
+    <script src="assets/js/script.js"></script>
+
+
+  
+
+ 
+<script>
+
+
+const param=new URLSearchParams(window.location.search);
+const id=param.get("id");
+let userId=document.getElementById("userId");
+
+userId.value=id;
+let msgBox=document.getElementById("box");
+let success_msg=document.getElementById("success-msg");
+
+
+   document.getElementById('saveDoctorForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    const response = await fetch("http://localhost:8080/api/doctors/save", {
+        method: "POST",
+        body: formData
+    });
+
+    const data = await response.json();
+
+    // Clear previous errors
+    form.querySelectorAll('.err_msg').forEach(span => span.innerText = '');
+
+    // If there are field-specific errors
+   if (data.status === "error" && data.errors) {
+    const errors = data.errors;
+    for (const field in errors) {
+        const input = form.querySelector(`[name="${field}"]`);
+        if (input) {
         
-        // Form validation
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Simple validation
-            let isValid = true;
-            const inputs = document.querySelectorAll('input, select');
-            
-            inputs.forEach(input => {
-                if (input.hasAttribute('required') && !input.value) {
-                    input.style.borderColor = 'var(--danger)';
-                    isValid = false;
-                } else {
-                    input.style.borderColor = '';
-                }
-            });
-            
-            if (isValid) {
-                // Show success message
-                alert('Form submitted successfully!');
+            const span = input.parentNode.querySelector('.err_msg');
+            if (span) span.innerText = errors[field]; 
+        }
+    }
+}
+
+    // General error
+    if (data.status === "error" && data.message) {
+        alert(data.message);
+    }
+
+    // Success (no status means success)
+    if (data.saveDoctor) {
+                success_msg.innerText = data.saveDoctor;
+                msgBox.style.display="flex";
+                // msg.innerText="";
+        form.reset();
+    }
+
+
+      setInterval(() => {
+                msgBox.style.display="none";
+
                 
-                // You would typically submit the form to a server here
-                // For demo purposes, we're just resetting the form
-                this.reset();
-                document.getElementById('fileName').textContent = 'None';
-            } else {
-                alert('Please fill in all required fields.');
-            }
-        });
-        
-        // Cancel button
-        document.querySelector('.btn-outline').addEventListener('click', function() {
-            if(confirm('Are you sure you want to cancel? All entered data will be lost.')) {
-                document.querySelector('form').reset();
-                document.getElementById('fileName').textContent = 'None';
-                
-                // Reset border colors
-                document.querySelectorAll('input, select').forEach(el => {
-                    el.style.borderColor = '';
-                });
-            }
-        });
-        
-        // Set minimum and maximum dates for graduation date
-        const graduationDate = document.getElementById('graduationDate');
-        const currentDate = new Date();
-        
-        // Set max attribute to today
-        graduationDate.max = currentDate.toISOString().split('T')[0];
-        
-        // Set min attribute to 50 years ago
-        const minDate = new Date();
-        minDate.setFullYear(currentDate.getFullYear() - 50);
-        graduationDate.min = minDate.toISOString().split('T')[0];
+            }, 4000);
+
+            
+});
+
     </script>
 </body>
 </html>
