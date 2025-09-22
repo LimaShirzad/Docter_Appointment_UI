@@ -429,7 +429,7 @@
                     <label for="username">Admin ID</label>
                     <div class="input-with-icon">
                         <i class="fas fa-user"></i>
-                        <input type="text" id="username" placeholder="Enter your admin ID" required>
+                        <input type="text" id="username" name="userName" placeholder="Enter your Username" >
                     </div>
                     <div class="error-message" id="username-error">Please enter a valid admin ID</div>
                 </div>
@@ -438,7 +438,7 @@
                     <label for="password">Password</label>
                     <div class="input-with-icon">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="password" placeholder="Enter your password" required>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" >
                         <button type="button" class="password-toggle" id="togglePassword">
                             <i class="fas fa-eye"></i>
                         </button>
@@ -479,6 +479,9 @@
         </div>
     </div>
 
+
+
+
     <script>
         // Toggle password visibility
         const togglePassword = document.getElementById('togglePassword');
@@ -491,109 +494,6 @@
             eyeIcon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
         });
         
-        // Form validation
-        const loginForm = document.getElementById('loginForm');
-        const usernameError = document.getElementById('username-error');
-        const passwordError = document.getElementById('password-error');
-        
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const passwordValue = document.getElementById('password').value;
-            
-            // Reset errors
-            usernameError.style.display = 'none';
-            passwordError.style.display = 'none';
-            
-            let isValid = true;
-            
-            // Username validation
-            if (username.trim() === '' || username.length < 4) {
-                usernameError.style.display = 'block';
-                isValid = false;
-            }
-            
-            // Password validation
-            if (passwordValue.length < 8) {
-                passwordError.style.display = 'block';
-                isValid = false;
-            }
-            
-            if (isValid) {
-                // Show loading state
-                const loginBtn = document.querySelector('.btn-login');
-                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
-                loginBtn.disabled = true;
-                
-                // Simulate API call
-                setTimeout(() => {
-                    alert('Login successful! Redirecting to admin dashboard...');
-                    loginForm.reset();
-                    loginBtn.innerHTML = 'Login to Dashboard';
-                    loginBtn.disabled = false;
-                }, 1500);
-            }
-        });
-        
-        // Add focus effect to inputs
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.querySelector('i').style.color = '#1a73e8';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.querySelector('i').style.color = '#a0aec0';
-            });
-        });
-
-
-
-
-
-
-
-// ================================================================================
-
-
-document.getElementById("loginForm").addEventListener("submit", async (e)=>{
-    e.preventDefault();
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    const res = await fetch("http://localhost:8080/api/user", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-    });
-
-    if(res.ok){
-        const data = await res.json();
-        localStorage.setItem("token", data.token);
-        window.location.href = "dashboard.html"; // login successful → dashboard
-    } else {
-        alert("Login failed");
-    }
-});
-
-
-
-
-
-
-
-// ==================================================================
-
-
-
-
-
-
-
-
-
-
 
 
 

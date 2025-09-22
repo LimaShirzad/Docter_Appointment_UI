@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+</head>
+<body>
+    <h1>Doctor Dashboard</h1>
+
+    <p><b>ID:</b> <span id="id"></span></p>
+    <p><b>Username:</b> <span id="username"></span></p>
+    <p><b>Role:</b> <span id="role"></span></p>
+
+    <p><b>Token:</b> <span id="token"></span></p>
+
+    <pre id="err" style="color:red;"></pre>
+
+    <button onclick="logoutDoctor()">Logout</button>
+
+    <script>
+      
+   
+   
+function logoutDoctor() {
+    localStorage.removeItem("doctorToken");
+    localStorage.removeItem("doctorId"); 
+    // redirect to login
+    window.location.href = "login.html";
+}
+
+
+
+async function myfun() {
+
+
+        const token = localStorage.getItem("doctor_token");
+
+
+
+const roleId = localStorage.getItem("doctor_roleId");
+const username = localStorage.getItem("doctor_username");
+
+if (roleId == 1) {
+    document.getElementById("username").innerText = username;
+    document.getElementById("role").innerText = roleId;
+} else {
+    document.getElementById("err").innerText = "Access denied!";
+    setTimeout(() => window.location.href = "login.html", 2000);
+}
+
+
+   
+
+    if (!token) {
+        console.error("No token found, please login first");
+        return;
+    }
+
+
+         const role = localStorage.getItem("role");
+   
+      
+    try {
+           const response = await fetch("http://localhost:8080/api/doctors/profile", {
+            method: "GET",
+            headers: {
+                // "Authorization": "Bearer " + localStorage.getItem("jwt"),
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            }
+});
+    
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch doctor details: " + response.status);
+        }
+
+
+        const data = await response.json();
+
+        // if(data.role=="Dotor"){
+          
+        console.log("Doctor Profile:", data);
+
+        document.getElementById("username").innerText = data.userName; // check field names
+        document.getElementById("role").innerText = data.role.role;
+        
+       
+       
+
+    } catch (err) {
+        console.error("Error:", err.message);
+        document.getElementById("err").innerText = err.message;
+    }
+         }
+
+
+myfun();
+
+    </script>
+</body>
+</html>

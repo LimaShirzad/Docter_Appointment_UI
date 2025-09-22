@@ -179,7 +179,7 @@
            
    </div>
 
-
+<div id="dashboard-content"></div>
 
 
 
@@ -194,122 +194,95 @@
 
 
 
-<script>
 
 
 
 
-// dashboard.html کې دې script include وي
-async function checkAuth() {
-    const token = localStorage.getItem("token");
-
-    if(!token){
-        // که JWT موجود نه وي → Login page ته redirect
-        window.location.href = "adminLogin.html";
-        return;
-    }
-
-    // JWT شته، نو Data fetch کوه
-    try {
-        const res = await fetch("http://localhost:8080/api/dashboard", {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-
-        if(res.status === 401){
-            // JWT invalid یا expired → Login page ته redirect
-            window.location.href = "login.html";
-        } else {
-            const data = await res.json();
-            console.log("Dashboard Data:", data);
-            // دلته د Dashboard DOM update کوه
-        }
-    } catch (err) {
-        console.error("Error fetching dashboard data", err);
-        window.location.href = "adminLogin.html";
-    }
-};
-
-checkAuth();
-
-
-
-
-//   async function getTotalDoctor() {
-
-//     const totalPattient=document.getElementById("total_patient");
-
-   
-
-//     try {
-        
-   
-//     const response= await fetch(`http://localhost:8080/api/dashboard/allPatent`);
-
-//     const allPatient=await response.json();
-
-//     if(response.ok)
-//     {
-//          totalPattient.innerHTML=allPatient;   
-
-//     }else{
-
-//         totalPattient.innerText="No Patients In Database";
-//     }
-//    }
-//      catch {
-
-//         totalPattient.innerText="Network Error";
-//         totalPattient.style.color="red";
-        
-//     }
-        
-//   }
-
-//   getTotalDoctor();
-
-//     async function getTotalPatient() {
-
-//     const totalDoctor=document.getElementById("total_doctor");
-
-//     // const totalDotor_URL="http://localhost:8080/api/dashboard/allDoctor";
-
-   
-//    try {
-
-//      const response= await fetch(`http://localhost:8080/api/dashboard/allDoctor`);
-
-//     const allDoctore=await response.json();
-
-//     if(response.ok)
-//     {
-//          totalDoctor.innerHTML=allDoctore;   
-
-//     }else{
-
-//         totalDoctor.innerText="No Docotore In Database";
-//     }
-
-    
-//    } catch {
-//                  totalDoctor.innerText="Network Err";
-//                  totalDoctor.style.color="red";
-                 
-//    }
-    
-
-        
-//   }
-
-//   getTotalPatient();
-
-
-</script>
-
-
+     <script src="assets/js/app.js"></script>
   
      <script src="assets/js/dashbord.js"></script>
+
+     <script>
+
+
+
+
+
+
+  async function getTotalDoctor() {
+
+    const totalPattient=document.getElementById("total_patient");
+
+   
+
+    try {
+        
+   
+    const response= await fetch(`http://localhost:8080/api/dashboard/allPatent`);
+
+    const allPatient=await response.json();
+
+    if(response.ok)
+    {
+         totalPattient.innerHTML=allPatient;   
+
+    }else{
+
+        totalPattient.innerText="No Patients In Database";
+    }
+   }
+     catch {
+
+        totalPattient.innerText="Network Error";
+        totalPattient.style.color="red";
+        
+    }
+        
+  }
+
+  getTotalDoctor();
+
+    async function getTotalPatient() {
+
+    const totalDoctor=document.getElementById("total_doctor");
+
+    // const totalDotor_URL="http://localhost:8080/api/dashboard/allDoctor";
+
+   
+   try {
+
+     const response= await fetch(`http://localhost:8080/api/dashboard/allDoctor`);
+
+    const allDoctore=await response.json();
+
+    if(response.ok)
+    {
+         totalDoctor.innerHTML=allDoctore;   
+
+    }else{
+
+        totalDoctor.innerText="No Docotore In Database";
+    }
+
+    
+   } catch {
+                 totalDoctor.innerText="Network Err";
+                 totalDoctor.style.color="red";
+                 
+   }
+    
+
+        
+  }
+
+  getTotalPatient();
+
+
+     </script>
+
+
+
+
 
 </body>
 </html>

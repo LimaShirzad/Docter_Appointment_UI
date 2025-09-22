@@ -15,7 +15,7 @@ async function loadRoles() {
 
         }
 
-loadRoles();
+loadRoles()
 
 async function loadSpecialty() {
 
@@ -55,7 +55,8 @@ document.getElementById("registrationForm").addEventListener("submit", async fun
         const data = await response.json();
 
 
-        console.log(data.user);
+        console.log(data);
+
         if(data.user.roleId==1)
          {
                 window.location.href=`doctorForm.html?id=${data.user.id}`;

@@ -283,7 +283,7 @@ loadSpecialty(currentPage);
 // =======================load ddSpecialty  end=======================
 
 document.addEventListener("DOMContentLoaded", async () => {
- msg.innerHTML="";
+//  msg.innerHTML="";
        
     const updateSpecialtyForm=document.getElementById("update_specialty_form");
     const title=document.getElementById("title");
@@ -297,13 +297,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const getSpecialty_URL=`http://localhost:8080/api/specialty/${specialty_id}`;
 
    
-    if (!specialty_id) {
+    // if (!specialty_id) {
 
-        // msg.innerHTML="";
-        msg.innerText = "No Specialty ID provided!";
-        msg.style.color = "red";
-        return;
-    }
+    //     // msg.innerHTML="";
+    //     msg.innerText = "No Specialty ID provided!";
+    //     msg.style.color = "red";
+    //     return;
+    // }
 
 
     try{
@@ -380,4 +380,164 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         
 });
+
+
+
+
+
+// =============================add specailty====================
+
+
+
+const specialtySaveForm=document.getElementById("specialty_form");
+
+const saveSpecialtyData_URL=("http://localhost:8080/api/specialty/save");
+
+// const msgBox=document.getElementById("msg_box");
+
+const errmsg=document.getElementById("msg");
+
+specialtySaveForm.addEventListener('submit',async e =>{
+
+    e.preventDefault();
+
+    const title=document.getElementById("title").value;
+
+    errmsg.innerText=" ";
+
+    const res=await fetch(saveSpecialtyData_URL,{
+
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify({title: title})
+
+  });
+
+    const data=await res.json();
+    console.log(data);
+
+    if(!res.ok){
+     if(data.errors && data.errors.title)
+     {
+          errmsg.innerText=data.errors.title;
+     }
+     else if(data.message){
+
+        errmsg.innerText=data.message;
+
+     }
+    }else{
+         
+          msgBox.innerText = "New Specialty Added Successfully"; //  shows success message
+                msgBox.style.right=0;
+                msg.innerText="";
+
+                specialtySaveForm.reset();
+     }
+   
+      setInterval(() => {
+
+                msgBox.style.right="-100%";
+
+                
+      }, 4000);
+
+
+    
+
+});
+    
+// =============================end specailty====================
+
+
+
+// ==============load data in dashord start=======================
+
+  async function getTotalDoctor() {
+
+    const totalPattient=document.getElementById("total_patient");
+
+   
+
+    try {
+        
+   
+    const response= await fetch(`http://localhost:8080/api/dashboard/allPatent`);
+
+    const allPatient=await response.json();
+
+    if(response.ok)
+    {
+         totalPattient.innerHTML=allPatient;   
+
+    }else{
+
+        totalPattient.innerText="No Patients In Database";
+    }
+   }
+     catch {
+
+        totalPattient.innerText="Network Error";
+        totalPattient.style.color="red";
+        
+    }
+        
+  }
+
+  getTotalDoctor();
+
+    async function getTotalPatient() {
+
+    const totalDoctor=document.getElementById("total_doctor");
+
+    // const totalDotor_URL="http://localhost:8080/api/dashboard/allDoctor";
+
+   
+   try {
+
+     const response= await fetch(`http://localhost:8080/api/dashboard/allDoctor`);
+
+    const allDoctore=await response.json();
+
+    if(response.ok)
+    {
+         totalDoctor.innerHTML=allDoctore;   
+
+    }else{
+
+        totalDoctor.innerText="No Docotore In Database";
+    }
+
+    
+   } catch {
+                 totalDoctor.innerText="Network Err";
+                 totalDoctor.style.color="red";
+                 
+   }
+    
+
+        
+  }
+
+  getTotalPatient();
+
+// ==============load data in dashord start=======================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

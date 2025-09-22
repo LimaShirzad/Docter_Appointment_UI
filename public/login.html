@@ -320,17 +320,18 @@
         
         <div class="login-form">
             <form id="loginForm">
+                <p id="msg"></p>
                 <div class="form-group">
-                    <label for="email" class="form-label">Email Address</label>
+
+                    <label for="email" class="form-label">UserName</label>
                     <div class="input-group">
                         <span class="input-icon">
                             <i class="fas fa-envelope"></i>
                         </span>
-                        <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="UserName" required>
                     </div>
                     <div class="error-box" id="emailError">
                         <i class="fas fa-exclamation-circle"></i>
-                        <span>Please enter a valid email address</span>
                     </div>
                 </div>
                 
@@ -340,10 +341,13 @@
                         <span class="input-icon">
                             <i class="fas fa-lock"></i>
                         </span>
-                        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
                         <button type="button" class="password-toggle" id="passwordToggle">
                             <i class="fas fa-eye"></i>
                         </button>
+
+
+
                     </div>
                     <div class="error-box" id="passwordError">
                         <i class="fas fa-exclamation-circle"></i>
@@ -401,6 +405,130 @@
         
        
         });
+
+
+   document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    let username=document.getElementById("username").value;
+    let password=document.getElementById("password").value;
+
+    let res = await fetch("http://localhost:8080/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username: username, password: password })
+    });
+
+    
+    
+    
+    
+    
+    
+    let data = await res.json();
+
+    // ✅ save common user data
+    localStorage.setItem("jwt", data.token);
+
+
+    console.log("Login response:", data);
+
+    // ✅ redirect based on roleId
+    if (data.role === 1) {   // Doctor roleId
+
+            localStorage.setItem("doctor_token", data.token);
+            localStorage.setItem("doctor_id", data.id);
+            localStorage.setItem("doctor_username", data.username);
+            localStorage.setItem("doctor_roleId", data.role);
+        // localStorage.setItem("doctor_token", data.token);
+        window.location.href = "doctorDashboard.html";
+    } 
+    else if (data.role === 72) {  // Patient roleId
+         localStorage.setItem("patient_token", data.token);
+        localStorage.setItem("patient_id", data.id);
+        localStorage.setItem("patient_username", data.username);
+        localStorage.setItem("patient_roleId", data.role);
+
+        // localStorage.setItem("patient_token", data.token);
+        window.location.href = "patientDashbord.html";
+    } 
+    else {
+        alert("Unknown role, cannot redirect");
+        window.location.href = "login.html";
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    // بدل کړل له text څخه json ته
+
+    // localStorage.setItem("jwt", data.token);
+    // localStorage.setItem("username", data.username);
+    // localStorage.setItem("id", data.id);
+    // localStorage.setItem("role", data.role);
+
+
+    // // if(data.role=)
+
+    // console.log(data);
+
+
+    // if(data.role==1){
+
+    //             localStorage.setItem("doctor_token", data.token);
+    //             localStorage.setItem("doctor_id", data.id);
+    //             localStorage.setItem("doctor_username", data.username);
+
+    //             window.location.href="doctorDashbord.html";
+
+    // }
+    // else if(data.role==72){
+
+    //      localStorage.setItem("patient_token", data.token);
+    //     localStorage.setItem("patient_id", data.id);
+    //     localStorage.setItem("patient_username", data.username);
+
+
+    //     window.location.href="patientDashbord.html";
+    // }
+    // else{
+    //     window.location.href="login.html";
+    // }
+
+
+
+
+
+            
+
+
+   });
+
+
+
+        // async function login(){
+
+               
+
+        // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>

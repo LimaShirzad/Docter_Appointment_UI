@@ -81,19 +81,6 @@
 
                             </div>
                
-                           <!-- <div class="form-section"> 
-                               
-                                 <div class="profile-pic-container"> 
-                                    <div class="profile-pic-preview" id="profilePicPreview">
-                                        <i class="fas fa-user-plus"></i>
-                                        <img id="previewImage" src="" alt="Preview">
-                                    </div>
-                                    <input type="file" class="form-control d-none" id="profilePic" accept="image/*">
-                                    <button type="button" class="btn btn-outline-primary" id="uploadBtn">
-                                        <i class="fas fa-cloud-upload-alt me-2"></i>Upload Photo
-                                    </button>
-                                </div> 
-                            </div>  -->
                         </div>
 
                         
@@ -110,7 +97,7 @@
                                     <label for="username" class="form-label">
                                         <i class="fas fa-user-circle"></i>Username
                                     </label>
-                                    <input type="text" class="form-control" id="username" name="userName" placeholder="Choose a username" >
+                                    <input type="text" class="form-control" id="userName" name="userName" placeholder="Choose a username" >
                                 <span  class="msg_err form-top-err"></span>
                                 </div>
                                 
@@ -178,50 +165,8 @@
     </div>
 
 
-    <!-- <script src="assets/js/script.js"></script> -->
+    <script src="assets/js/script.js"></script>
     <script src="assets/js/publicApp.js"></script>
-
-<script>
-
-
-
-
-
-// document.getElementById("registrationForm").addEventListener("submit", async function(e) {
-//     e.preventDefault();
-
-//     const form = e.target;
-
-//     const formData = new FormData(form);
-
-//     try {
-//         const response = await fetch("http://localhost:8080/api/user/save", {
-//             method: "POST",
-//             body: formData
-//         });
-
-//         const data = await response.json();
-
-
-//         console.log(data.user);
-//         if(data.user.roleId==1)
-//         {
-//                 window.location.href=`doctorForm.html?id=${data.user.id}`;
-//         }else if(data.user.roleId==72){
-
-//               window.location.href=`patientForm.html?id=${data.user.id}`;
-
-//         }
-        
-        
-//     } catch (err) {
-
-        
-      
-//     }
-// });
-
-</script>
 
 
 </body>

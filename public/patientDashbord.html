@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>patient Dashboard</title>
+</head>
+<body>
+    
+<h1>pateint dashbboard</h1>
+    <p><b>Role:</b> <span id="role"></span></p>
+    <p><b>username:</b> <span id="username"></span></p>
+
+    <span id="err"></span>
+
+    <button onclick="logoutPatient()">Logout</button>
+
+<script>
+
+      function logoutPatient() {
+    localStorage.removeItem("patientToken");
+    localStorage.removeItem("patientId");
+    // redirect to login
+    window.location.href = "login.html";
+}
+     
+const roleId = localStorage.getItem("patient_roleId");
+const username = localStorage.getItem("patient_username");
+
+if (roleId == 72) {
+    document.getElementById("username").innerText = username;
+    document.getElementById("role").innerText = roleId;
+} else {
+    document.getElementById("err").innerText = "Access denied!";
+    setTimeout(() => window.location.href = "login.html", 2000);
+}
+
+
+          
+        
+</script>
+
+</body>
+</html>
