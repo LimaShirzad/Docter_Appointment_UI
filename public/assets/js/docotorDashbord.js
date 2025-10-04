@@ -27,34 +27,19 @@ document.addEventListener("DOMContentLoaded", function () {
                             <span>Patients</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-prescription"></i>
-                            <span>Prescriptions</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-stethoscope"></i>
-                            <span>Consultations</span>
-                        </a>
-                    </li>
+                  
+                  
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class="fas fa-chart-line"></i>
                             <span>Reports</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-cog"></i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                    <li class="nav-item mt-4">
+                   
+                    <li class="nav-item mt-4" onclick="logoutDoctor()">
                         <a class="nav-link" href="#">
                             <i class="fas fa-sign-out-alt"></i>
-                            <span>Logout</span>
+                            <span >Logout</span>
                         </a>
                     </li>
                 </ul>
@@ -73,27 +58,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <div class="topbar d-flex justify-content-between align-items-center">
                 <div class="search-bar">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                
                 </div>
                 <div class="d-flex align-items-center">
-                    <div class="me-4 position-relative">
-                        <a href="#" class="text-dark">
-                            <i class="fas fa-bell fa-lg"></i>
-                            <span class="notification-badge">3</span>
-                        </a>
-                    </div>
+              <a class="nav-link" href="doctorProfile.html">
                     <div class="user-profile d-flex align-items-center">
-                        <img src="https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-stethoscope-around-neck-standing-with-closed-posture_409827-254.jpg" alt="Doctor">
+                        <img src="" alt="Doctor" id="doctorImage">
                         <div class="ms-2">
-                            <div class="fw-bold">Dr. Sarah Johnson</div>
-                            <div class="small text-muted">Cardiologist</div>
+                            <div class="fw-bold">Dr . <span id="firstName"></span>  <span id="lastName"></span></div>
+                            <div class="small text-muted" id="specialty"></div>
                         </div>
                     </div>
+                </a>
                 </div>
             </div>`
 

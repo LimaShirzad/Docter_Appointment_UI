@@ -51,7 +51,8 @@
  }
  
  .navbar-brand span {
-     color: var(--accent);
+     /* color: var(--accent); */
+     color: #00c9c8;
      margin-left: 4px;
  }
  

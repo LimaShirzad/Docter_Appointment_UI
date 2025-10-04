@@ -6,20 +6,17 @@
     <title>Book Appointment | Healthcare Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
+    <link rel="stylesheet" href="assets/css/header.css">
+   <style>
+         :root {
             --primary: #3498db;
             --secondary: #2ecc71;
             --accent: #e74c3c;
-            --light: #f8f9fa;
-            --dark: #343a40;
+            --light: #f8f9fa; 
+            --dark: #343a40; 
         }
         
-        body {
-            background-color: #f5f7f9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-        }
+    
         
         .appointment-container {
             max-width: 1200px;
@@ -97,34 +94,46 @@
 <body>
 
 
-    <div class="container appointment-container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="booking-card">
-                    <div class="card-header">
+        <div id="header_box"></div>
+
+    <div class="container appointment-container mt-5">
+        <div class="row mt-5">
+            <div class="col-lg-12 mt-5">
+                <div class="booking-card mt-4">
+                    <div class="card-header ">
                         <i class="fas fa-user-md me-2"></i>Select a Doctor
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id="card-body">
+
                    
-              
+<!--               
                         <div class="doctor-card">
-                            <div class="row align-items-center">
+                             <div class="row align-items-center"> 
                                 <div class="col-md-2 text-center">
-                                    <img src="https://img.freepik.com/free-photo/confident-young-female-doctor_329181-9256.jpg" class="doctor-img" alt="Dr. Emily Rodriguez">
+                                    <img src="" id="doctorImage" class="doctor-img" >
                                 </div>
                                 <div class="col-md-7">
-                                    <span class="specialty-badge">Dermatology</span>
-                                    <h4 class="mb-1">Dr. Emily Rodriguez</h4>
+                                    <span class="specialty-badge" id="specialty"></span>
+                                    <h4 class="mb-1">Dr. <span id="firstName"></span> <span id="lastName"></span></h4>
                                     <div class="rating">
                                        
                                     </div>
-                                    <p class="mb-0 text-muted">MD, Stanford University</p>
+                                    <p class="mb-0 text-muted"><span id="education"></span>, <span id="university"></span></p>
                                 </div>
                                 <div class="col-md-3 text-md-end">
-                                    <button class="btn btn-outline-primary btn-sm">Select</button>
+                                    <button class="btn btn-outline-primary btn-sm">view</button>
                                 </div>
-                            </div>
-                        </div>
+                            </div> 
+                        </div> -->
+
+
+                        <!--  -->
+
+
+
+
+
+
                     </div>
                 </div>
                 
@@ -135,6 +144,114 @@
         
         </div>
     </div>
+
+
+
+<script src="assets/js/header.js"></script>
+
+
+
+
+
+
+<script>
+//     async function loadDoctorProfile() {
+
+//          const res=await fetch('http://localhost:8080/api/client');
+
+//             const data=await res.json();
+//             console.log(data);
+
+        
+//             data.forEach(item => {
+
+
+//             document.getElementById("specialty").innerHTML=item.specialty;
+//             document.getElementById("firstName").innerHTML=item.firstName;
+//             document.getElementById("lastName").innerHTML=item.lastName;
+//             document.getElementById("education").innerHTML=item.education;
+//             document.getElementById("university").innerHTML=item.universityName;
+
+
+
+//                if (item.profilePicture) {
+//                      document.getElementById("doctorImage").src =
+//                     "data:image/png;base64," + item.profilePicture;
+//           }
+
+
+//              });
+
+        
+// }
+      
+
+// loadDoctorProfile();
+
+
+    const token = sessionStorage.getItem("token");
+    
+    const role = sessionStorage.getItem("role");
+    const username = sessionStorage.getItem("username");
+    const id = sessionStorage.getItem("id");
+
+    //console.log(role);
+    // console.log(id);
+    // console.log(username);
+    // console.log(token);
+
+
+async function loadDoctorProfile() {
+
+   
+
+    if(token){
+    const res = await fetch('http://localhost:8080/api/client');
+    const data = await res.json();
+    console.log(data);
+
+    const container = document.getElementById("card-body");
+    container.innerHTML = ""; // clear old data
+
+
+
+  
+    data.forEach(item => {
+        // create card dynamically
+        const card = `
+            <div class="doctor-card">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <img src="${item.profilePicture ? "data:image/png;base64," + item.profilePicture : 'https://via.placeholder.com/80'}" 
+                             class="doctor-img" alt="Doctor">
+                    </div>
+                    <div class="col-md-7">
+                        <span class="specialty-badge">${item.specialty}</span>
+                        <h4 class="mb-1">Dr. ${item.firstName} ${item.lastName}</h4>
+                        <p class="mb-0 text-muted">${item.education}, ${item.universityName}</p>
+                    </div>
+                    <div class="col-md-3 text-md-end">
+                        <button class="btn btn-outline-primary btn-sm"  onclick="window.location.href='takeappoinment.html?id=${item.id}'"  >View</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        container.innerHTML += card;
+    });
+}
+else{
+    alert("Please Login first");
+    window.location.href="login.html";
+}
+}
+
+loadDoctorProfile();
+
+</script>
+
+
+
 
 
 </body>

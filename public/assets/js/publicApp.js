@@ -88,11 +88,7 @@ document.getElementById("registrationForm").addEventListener("submit", async fun
 
 
 
-
-
-
-
-
+// =============================start load of doctre profile===========
 
 
 

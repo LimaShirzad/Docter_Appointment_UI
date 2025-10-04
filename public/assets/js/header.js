@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </li>
                 </ul>
                 <div class="ms-lg-3 mt-3 mt-lg-0">
-                    <a href="#appointment" class="btn btn-appointment">Book Appointment</a>
+                    <a href="appointmet.html" class="btn btn-appointment">Book Appointment</a>
                 </div>
             </div>
         </div>

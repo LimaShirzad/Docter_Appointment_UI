@@ -16,14 +16,13 @@
             font-family: 'Poppins', sans-serif;
         }
         
-        body {
+        /* body {
             background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 20px;
             color: var(--dark);
-        }
+        } */
         
         .form-container {
             background: white;
@@ -751,4 +750,62 @@
     align-items: center;
     justify-content: center;
      color: darkblue;
- }        
+ }    
+ 
+ 
+
+
+        .doctor_profile-card {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .doctor_profile-header {
+            background: linear-gradient(135deg, #1a75bc 0%, #0d47a1 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .doctor_profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+        }
+        .doctor_profile-info {
+            padding: 30px;
+        }
+        .doctor_info-group {
+            margin-bottom: 25px;
+        }
+        .doctor_info-label {
+            font-weight: 600;
+            color: #1a75bc;
+            margin-bottom: 5px;
+        }
+        .doctor_info-value {
+            font-size: 1.1rem;
+        }
+        .doctor_section-title {
+            border-bottom: 2px solid #1a75bc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #1a75bc;
+        }
+        .doctor_btn-edit {
+            background: linear-gradient(135deg, #1a75bc 0%, #0d47a1 100%);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .doctor_btn-edit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+
+

@@ -81,7 +81,8 @@
                             </div>
                             <div class="card-body p-0">
                                 <div class="appointment-item d-flex align-items-center">
-                                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=random" class="patient-img me-3" alt="Patient">
+                                    <img src="" 
+                                    class="patient-img me-3" alt="Patient">
                                     <div class="flex-grow-1">
                                         <h6 class="mb-0">John Doe</h6>
                                         <small class="text-muted">Regular Checkup</small>
@@ -91,39 +92,7 @@
                                         <span class="status-badge status-confirmed">Confirmed</span>
                                     </div>
                                 </div>
-                                <div class="appointment-item d-flex align-items-center">
-                                    <img src="https://ui-avatars.com/api/?name=Emma+Wilson&background=random" class="patient-img me-3" alt="Patient">
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-0">Emma Wilson</h6>
-                                        <small class="text-muted">Cardiology Consultation</small>
-                                    </div>
-                                    <div class="text-end">
-                                        <div class="appointment-time mb-1">11:30 AM</div>
-                                        <span class="status-badge status-confirmed">Confirmed</span>
-                                    </div>
-                                </div>
-                                <div class="appointment-item d-flex align-items-center">
-                                    <img src="https://ui-avatars.com/api/?name=Robert+Brown&background=random" class="patient-img me-3" alt="Patient">
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-0">Robert Brown</h6>
-                                        <small class="text-muted">Follow-up Visit</small>
-                                    </div>
-                                    <div class="text-end">
-                                        <div class="appointment-time mb-1">1:15 PM</div>
-                                        <span class="status-badge status-pending">Pending</span>
-                                    </div>
-                                </div>
-                                <div class="appointment-item d-flex align-items-center">
-                                    <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=random" class="patient-img me-3" alt="Patient">
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-0">Sarah Miller</h6>
-                                        <small class="text-muted">ECG Test</small>
-                                    </div>
-                                    <div class="text-end">
-                                        <div class="appointment-time mb-1">3:00 PM</div>
-                                        <span class="status-badge status-confirmed">Confirmed</span>
-                                    </div>
-                                </div>
+                        
                                 <div class="appointment-item d-flex align-items-center">
                                     <img src="https://ui-avatars.com/api/?name=Michael+Taylor&background=random" class="patient-img me-3" alt="Patient">
                                     <div class="flex-grow-1">
@@ -148,17 +117,10 @@
 
 
 
-     <h1>Doctor Dashboard</h1>
 
-    <p><b>ID:</b> <span id="id"></span></p>
-    <p><b>Username:</b> <span id="username"></span></p>
-    <p><b>Role:</b> <span id="role"></span></p>
+    <!-- <p><b>Token:</b> <span id="token"></span></p>
 
-    <p><b>Token:</b> <span id="token"></span></p>
-
-    <pre id="err" style="color:red;"></pre>
-
-    <button onclick="logoutDoctor()">Logout</button>
+    <pre id="err" style="color:red;"></pre> -->
 
 
 
@@ -166,84 +128,80 @@
 
     <script>
 
+     
         function logoutDoctor() {
-    localStorage.removeItem("doctorToken");
-    localStorage.removeItem("doctorId"); 
-    // redirect to login
+    sessionStorage.clear(); // clears only this doctor’s session
     window.location.href = "login.html";
 }
 
-
-
-async function myfun() {
-
-
-        const token = localStorage.getItem("doctor_token");
-
-
-
-const roleId = localStorage.getItem("doctor_roleId");
-const username = localStorage.getItem("doctor_username");
-
-if (roleId == 1) {
-    document.getElementById("username").innerText = username;
-    document.getElementById("role").innerText = roleId;
-} else {
-    document.getElementById("err").innerText = "Access denied!";
-    setTimeout(() => window.location.href = "login.html", 2000);
-}
-
-
-   
+async function loadDoctorProfile() {
+    const token = sessionStorage.getItem("token");
+    const role = sessionStorage.getItem("role");
+    const username = sessionStorage.getItem("username");
+    const id = sessionStorage.getItem("id");
 
     if (!token) {
-        console.error("No token found, please login first");
+        window.location.href = "login.html";
         return;
     }
 
+    if (role != 1) {
+        document.getElementById("err").innerText = "Access denied!";
+        return;
+    }
 
-         const role = localStorage.getItem("role");
-   
-      
+    // document.getElementById("username").innerText = username;
+    // document.getElementById("role").innerText = role;
+    // document.getElementById("id").innerText = id;
+    // document.getElementById("token").innerText = token;
+
     try {
-           const response = await fetch("http://localhost:8080/api/doctors/profile", {
+        const response = await fetch("http://localhost:8080/api/doctors/profile", {
             method: "GET",
-            headers: {
-                // "Authorization": "Bearer " + localStorage.getItem("jwt"),
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            }
-});
-    
+            headers: { "Authorization": "Bearer " + token }
+        });
 
-        if (!response.ok) {
-            throw new Error("Failed to fetch doctor details: " + response.status);
-        }
+        if (!response.ok) throw new Error("Failed to fetch doctor profile");
 
-
+         
         const data = await response.json();
-
-        // if(data.role=="Dotor"){
-          
         console.log("Doctor Profile:", data);
 
-        document.getElementById("username").innerText = data.userName; // check field names
-        document.getElementById("role").innerText = data.role.role;
-        
-       
-       
+
+          if (data.profilePicture) {
+            document.getElementById("doctorImage").src =
+                "data:image/png;base64," + data.profilePicture;
+        }
+
+        // load the data 
+
+        const firstName=document.getElementById("firstName");
+        const lastName=document.getElementById("lastName");
+        const specialty=document.getElementById("specialty");
+
+        firstName.innerText=data.firstName;
+        lastName.innerText=data.lastName;
+        specialty.innerText=data.specialty;
+
+
+
+
+
+
+
+
+
+
 
     } catch (err) {
         console.error("Error:", err.message);
         document.getElementById("err").innerText = err.message;
     }
-         }
+}
 
+loadDoctorProfile();
 
-myfun();
     </script>
-
-    
 
 </body>
 </html>
