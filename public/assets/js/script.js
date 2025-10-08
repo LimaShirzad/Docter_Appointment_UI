@@ -1,52 +1,94 @@
-//  document.addEventListener('DOMContentLoaded', function() {
-//      // Password toggle functionality
-//      const passwordToggle = document.getElementById('passwordToggle');
-//      const passwordField = document.getElementById('password');
-     
-//      function togglePasswordVisibility(field, toggle) {
-//   if (field.type === 'password') {
-//       field.type = 'text';
-//       toggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
-//   } else {
-//       field.type = 'password';
-//       toggle.innerHTML = '<i class="fas fa-eye"></i>';
-//   }
-//      }
-     
-//      passwordToggle.addEventListener('click', function() {
-//         togglePasswordVisibility(passwordField, passwordToggle);
-//      });
-     
- 
-     
-//      // Profile picture upload
-//      const profilePicPreview = document.getElementById('profilePicPreview');
-//      const profilePicInput = document.getElementById('profilePic');
-//      const uploadBtn = document.getElementById('uploadBtn');
-//      const previewImage = document.getElementById('previewImage');
-     
-//      uploadBtn.addEventListener('click', function() {
-//   profilePicInput.click();
-//      });
-     
-//      profilePicInput.addEventListener('change', function() {
-//   const file = this.files[0];
-//   if (file) {
-//       const reader = new FileReader();
-//       reader.onload = function(e) {
-//    previewImage.src = e.target.result;
-//    previewImage.style.display = 'block';
-//    profilePicPreview.querySelector('i').style.display = 'none';
-//       }
-//       reader.readAsDataURL(file);
-//   }
-//      });
-     
-//      // Gender selection
- 
 
- 
-//  });
+
+    const token = sessionStorage.getItem("token");
+    
+    const role = sessionStorage.getItem("role");
+    const username = sessionStorage.getItem("username");
+    const id = sessionStorage.getItem("id");
+
+
+
+    function logoutPatient() {
+    sessionStorage.clear(); 
+    window.location.href = "login.html";
+}
+
+
+
+async function loadPatientProfile() {
+
+    // document.getElementById("username").innerText=username;
+    // document.getElementById("role").innerText=role;
+    
+    console.log(token);
+
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    if (role != 72) {
+        document.getElementById("err").innerText = "Access denied!";
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:8080/api/patient/profile", {
+            method: "GET",
+            headers: { "Authorization": "Bearer " + token }
+        });
+
+        if (!response.ok) throw new Error("Failed to fetch pateint profile");
+
+         
+        const data = await response.json();
+        console.log("patint Profile:", data);
+
+
+          if (data.profilePicture) {
+            document.getElementById("patientImage").src =
+                "data:image/png;base64," + data.profilePicture;
+
+                 document.getElementById("profilePicture").src =
+                "data:image/png;base64," + data.profilePicture;
+          }
+
+          document.getElementById("firstName").innerHTML=data.firstName;
+          document.getElementById("lastName").innerHTML=data.lastName;
+
+          document.getElementById("profirstName").innerHTML=data.firstName;
+          document.getElementById("prolastName").innerHTML=data.lastName;
+          document.getElementById("gender").innerHTML=data.gender;
+          document.getElementById("email").innerHTML=data.email;
+          document.getElementById("userName").innerHTML=data.userName;
+          document.getElementById("password").innerHTML=data.password;
+          document.getElementById("bloodGroup").innerHTML=data.bloodGroup;
+          document.getElementById("id").innerHTML=data.id;
+
+
+
+
+
+    } catch (err) {
+        console.error("Error:", err.message);
+        document.getElementById("err").innerText = err.message;
+    }
+}
+
+
+loadPatientProfile();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       document.getElementById('cv').addEventListener('change', function(e) {
@@ -55,8 +97,4 @@
         });
 
 
-
-
-// =============uploading pdf file in doctorform start==============
-
-// =============uploading pdf file in doctorform end================
+    

@@ -21,12 +21,7 @@
                     <div class="page-header">
                         <h1 class="page-title">Dashboard</h1>
                         <div class="date-selector">
-                            <!-- <select class="form-select">
-                                <option>Today</option>
-                                <option>This Week</option>
-                                <option>This Month</option>
-                                <option>This Year</option>
-                            </select> -->
+                        
                         </div>
                     </div>
                     
@@ -70,18 +65,7 @@
                             </div>
                         </div>
                         
-                        <!-- <div class="col-md-3 col-sm-6">
-                            <div class="stats-card">
-                                <div class="card-icon bg-danger-light">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                </div>
-                                <h3 class="card-title">Revenue</h3>
-                                <div class="card-value">$24,560</div>
-                                <div class="card-change positive">
-                                    <i class="fas fa-arrow-up"></i> 15% from last month
-                                </div>
-                            </div>
-                        </div> -->
+                      
                     </div>
                  
               
@@ -196,91 +180,9 @@
 
 
 
-
-
-     <script src="assets/js/app.js"></script>
+      <script src="assets/js/app.js"></script>
   
      <script src="assets/js/dashbord.js"></script>
-
-     <script>
-
-
-
-
-
-
-  async function getTotalDoctor() {
-
-    const totalPattient=document.getElementById("total_patient");
-
-   
-
-    try {
-        
-   
-    const response= await fetch(`http://localhost:8080/api/dashboard/allPatent`);
-
-    const allPatient=await response.json();
-
-    if(response.ok)
-    {
-         totalPattient.innerHTML=allPatient;   
-
-    }else{
-
-        totalPattient.innerText="No Patients In Database";
-    }
-   }
-     catch {
-
-        totalPattient.innerText="Network Error";
-        totalPattient.style.color="red";
-        
-    }
-        
-  }
-
-  getTotalDoctor();
-
-    async function getTotalPatient() {
-
-    const totalDoctor=document.getElementById("total_doctor");
-
-    // const totalDotor_URL="http://localhost:8080/api/dashboard/allDoctor";
-
-   
-   try {
-
-     const response= await fetch(`http://localhost:8080/api/dashboard/allDoctor`);
-
-    const allDoctore=await response.json();
-
-    if(response.ok)
-    {
-         totalDoctor.innerHTML=allDoctore;   
-
-    }else{
-
-        totalDoctor.innerText="No Docotore In Database";
-    }
-
-    
-   } catch {
-                 totalDoctor.innerText="Network Err";
-                 totalDoctor.style.color="red";
-                 
-   }
-    
-
-        
-  }
-
-  getTotalPatient();
-
-
-     </script>
-
-
 
 
 

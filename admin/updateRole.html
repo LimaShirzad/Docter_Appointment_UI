@@ -70,18 +70,13 @@
 <div id="msg_box" class="card"></div>
  
 
-<script src="assets/js/comman.js"></script>
-<script src="assets/js/dashbord.js"></script>
-<script src="assets/js/app.js"></script>
 
 
-
-
-
-
-
-<script>
+<!-- <script>
+    
 document.addEventListener("DOMContentLoaded", async () => {
+
+    const token = sessionStorage.getItem("token");
 
     const updateForm = document.getElementById("updateRoleForm");
     const roleInput = document.getElementById("role");
@@ -100,7 +95,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 2. Load existing role and show in input
     try {
-        const res = await fetch(`http://localhost:8080/api/roles/${roleId}`);
+        const res = await fetch(`http://localhost:8080/api/roles/${roleId}`,{
+            //   method: "GET",
+                      headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+
+        });
         if (!res.ok) throw new Error("Failed to load role");
 
         const data = await res.json();
@@ -121,7 +122,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
             const res = await fetch(`http://localhost:8080/api/roles/${roleId}`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json" ,
+                        "Authorization": `Bearer ${token}`
+
+
+
+                },
                 body: JSON.stringify({ role: roleInput.value })
             });
 
@@ -163,7 +169,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
 });
-</script>
+</script> -->
+
+<script src="assets/js/comman.js"></script>
+<script src="assets/js/dashbord.js"></script>
+<script src="assets/js/app.js"></script>
+
+
+
+
+
+
+
 
 
 <script src="assets/js/comman.js"></script>

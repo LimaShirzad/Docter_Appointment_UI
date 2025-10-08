@@ -91,17 +91,24 @@
     
 
 
-<script src="assets/js/comman.js"></script>
-<script src="assets/js/dashbord.js"></script>
-<script src="assets/js/app.js"> </script>
 
- <script>
+ <!-- <script>
+
+    const token = sessionStorage.getItem("token");
 
         async function loadRoles() {
 
-            const res=await fetch('http://localhost:8080/api/roles');
+            const res=await fetch('http://localhost:8080/api/roles',{
+
+                  method: "GET",
+                  headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+
+            });
 
             const roles=await res.json();
+            console.log(roles);
 
             const tbody=document.getElementById("roleTable").querySelector("tbody");
             tbody.innerHTML='';
@@ -138,7 +145,14 @@ loadRoles();
 
 
 
-</script>  
+</script>   -->
+
+
+
+<script src="assets/js/comman.js"></script>
+<script src="assets/js/dashbord.js"></script>
+<script src="assets/js/app.js"> </script>
+
 
 
 

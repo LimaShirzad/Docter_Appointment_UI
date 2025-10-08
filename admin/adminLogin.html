@@ -426,7 +426,7 @@
             
             <form id="loginForm">
                 <div class="form-group">
-                    <label for="username">Admin ID</label>
+                    <label for="username">UserName</label>
                     <div class="input-with-icon">
                         <i class="fas fa-user"></i>
                         <input type="text" id="username" name="userName" placeholder="Enter your Username" >
@@ -446,36 +446,36 @@
                     <div class="error-message" id="password-error">Password must be at least 8 characters</div>
                 </div>
                 
-                <div class="remember-forgot">
+                <!-- <div class="remember-forgot">
                     <div class="remember">
                         <input type="checkbox" id="remember">
                         <label for="remember">Remember me</label>
                     </div>
                     <a href="#" class="forgot-password">Forgot Password?</a>
-                </div>
+                </div> -->
                 
                 <button type="submit" class="btn-login">Login to Dashboard</button>
             </form>
             
-            <div class="divider">
+            <!-- <div class="divider">
                 <span></span>
                 <p>or continue with</p>
                 <span></span>
-            </div>
+            </div> -->
             
-            <div class="social-login">
+            <!-- <div class="social-login">
                 <div class="social-btn google">
                     <i class="fab fa-google"></i>
                 </div>
                 <div class="social-btn microsoft">
                     <i class="fab fa-microsoft"></i>
                 </div>
-            </div>
+            </div> -->
             
-            <div class="footer">
+            <!-- <div class="footer">
                 <p>&copy; 2023 MediAdmin System. All rights reserved.</p>
                 <p>v3.5.1 | Secure Access Only</p>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -494,6 +494,57 @@
             eyeIcon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
         });
         
+
+
+
+
+        
+   document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    let username=document.getElementById("username").value;
+    let password=document.getElementById("password").value;
+
+    let res = await fetch("http://localhost:8080/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username: username, password: password })
+    });
+
+    
+    
+    
+    
+    
+    
+    let data = await res.json();
+
+
+
+    console.log(data);
+
+     sessionStorage.setItem("token", data.token);
+    sessionStorage.setItem("adminid", data.id);
+    sessionStorage.setItem("adminusername", data.username);
+    sessionStorage.setItem("adminrole", data.role);
+
+
+
+      if (data.role == 80) {
+        window.location.href = "dashbord.html";
+    } 
+    else {
+        alert("Unknown role, cannot redirect");
+    }
+
+
+    // console.log("Login response:", data);
+
+         
+
+
+   });
+
 
 
 

@@ -48,9 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         </a>
                     </li>
                     <li>
-                        <a href="#" >
-                            <i class="fas fa-cog"></i>
-                            <span>Settings</span>
+                        <a href="#" onclick="adminlogout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                           
+                            <span>Logout</span>
                         </a>
                     </li>
                 </ul>
