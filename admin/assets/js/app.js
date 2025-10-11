@@ -428,3 +428,140 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 });
+
+
+
+
+
+
+// ========================================================================================
+
+  let totalPages = 1;
+async function loadDoctorsWithePagination(page){
+  try{
+    const res = await fetch(`http://localhost:8080/api/dashboard/doctors?page=${page}&size=${pageSize}`,{
+      headers: {"Authorization": `Bearer ${token}`}
+    });
+
+    if(!res.ok){
+      const text = await res.text();
+      console.error(" Failed to fetch doctors", res.status, text);
+      return;
+    }
+
+    const response = await res.json();
+    // console.log("Doctors response:", response);
+
+    const doctors = response.doctors; 
+    console.log(doctors);
+    const tbody = document.getElementById("doctorTableBody");
+    tbody.innerHTML = "";
+
+    if(!doctors || doctors.length === 0){
+      tbody.innerHTML = `<tr><td colspan="11" class="text-center text-muted">No doctors found.</td></tr>`;
+      return;
+    }
+
+    doctors.forEach(d=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${d.id}</td>
+         <td>${d.profilePicture ? `<img src="data:image/png;base64,${d.profilePicture}" class="rounded-circle me-3"  height="40" width="50"/>` : ""}</td>
+
+        <td>${d.firstName}</td>
+        <td>${d.lastName}</td>
+   
+        <td>${d.specialty}</td>
+        <td>${d.education}</td>
+        <td>${d.universityName}</td>
+     
+        <td>${d.experienceYear || ""}</td>
+
+           <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-eye" onclick="window.location.href='viewDoctore.html?id=${d.id}'"></i></button>
+          <button class="btn btn-sm btn-outline-danger" onclick="deleteDoctor(${d.id})"><i class="fas fa-trash"></i></button>
+      `;
+      tbody.appendChild(tr);
+
+
+    });
+
+    //  const pageDiv = document.querySelector(".paginationnew");
+    // pageDiv.innerHTML = "";
+    // for (let i = 0; i < data.totalPages; i++) {
+    //   pageDiv.innerHTML += `<li class="page-item page-link" onclick="loadSpecialty(${i})">${i + 1}</li>`;
+    // }
+
+    // Pagination buttons
+    document.getElementById("pageInfo").innerText = `Page ${response.currentPage + 1} of ${response.totalPages}`;
+    document.getElementById("prevBtn").disabled = (response.currentPage === 0);
+    document.getElementById("nextBtn").disabled = (response.currentPage + 1 >= response.totalPages);
+
+  }catch(err){
+    console.error(" Error in loadDoctors:", err);
+    document.getElementById("doctorTableBody").innerHTML = `<tr><td colspan="11" class="text-center text-danger">Failed to load doctors.</td></tr>`;
+  }
+}
+
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    if (currentPage > 0) {
+      currentPage--;
+      loadDoctorsWithePagination(currentPage);
+    }
+  });
+
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    currentPage++;
+    loadDoctorsWithePagination(currentPage);
+  });
+
+    // const pageDiv = document.querySelector(".paginationnew");
+    // pageDiv.innerHTML = "";
+    // for (let i = 0; i < data.totalPages; i++) {
+    //   pageDiv.innerHTML += `<li class="page-item page-link" onclick="loadSpecialty(${i})">${i + 1}</li>`;
+    // }
+
+  loadDoctorsWithePagination(currentPage);
+
+
+
+
+
+// ======================================================================================
+
+
+
+
+
+async function deleteDoctor(id) {
+
+  if(!id) return alert("Invalid ID");
+
+  const confirm = await customConfirm("Are you sure to Reomve The Docotor?");
+   
+  if(!confirm) return;
+   
+     const response=await fetch(`http://localhost:8080/api/dashboard/deleteDoctor/${id}`,{
+
+            method: "DELETE",
+            headers: {"Authorization": `Bearer ${token}` }
+
+     });
+
+     if(response.ok)
+     {
+            customAlert("Doctore Remove Suesscfullly","success");
+            loadDoctorsWithePagination(3);
+     }else{
+                  
+    const error = await response.json();
+
+    customAlert(error.error || "Failed to delete Docotor", "error");
+
+     }
+
+
+}
+
+
+
+

@@ -75,21 +75,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
                 
                 <div class="header-right">
-                    <div class="notification-icon">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge">3</span>
-                    </div>
-                    
-                    <div class="messages-icon">
-                        <i class="fas fa-envelope"></i>
-                        <span class="badge">5</span>
-                    </div>
+                   
                     
                     <div class="user-profile">
-                        <div class="user-avatar">JD</div>
+                        <div class="user-avatar">
+                          <img src="" id="adminImage" style="height:50px; width:50px; border-radius: 50px;" >
+                        </div>
                         <div class="user-info">
-                            <div class="user-name">John Doe</div>
-                            <div class="user-role">Administrator</div>
+                            <div class="user-name"><span id="adminfirstname"></span>  <span id="adminlastname"></span></div>
+                            <div class="user-role" id="role"></div>
                         </div>
                     </div>
                 </div>
@@ -134,6 +128,49 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+
+
+    async function loadAdminProfile() {
+
+
+    try {
+        const response = await fetch("http://localhost:8080/api/dashboard/adminprofile", {
+            method: "GET",
+            headers: { "Authorization": "Bearer " + token }
+        });
+
+        if (!response.ok) throw new Error("Failed to fetch admin profile");
+
+         
+        const data = await response.json();
+        console.log("Doctor Profile:", data);
+
+
+
+          if (data.profilePicture) {
+            document.getElementById("adminImage").src =
+                "data:image/png;base64," + data.profilePicture;
+        }
+
+          document.getElementById("adminfirstname").innerHTML=data.firstName;
+          document.getElementById("adminlastname").innerHTML=data.lastName;
+          document.getElementById("role").innerHTML=data.role;
+
+
+    } catch (err) {
+        console.error("Error:", err.message);
+        document.getElementById("err").innerText = err.message;
+    }
+}
+
+loadAdminProfile();
+
+
+
+
+
+
 
     //  document.querySelectorAll('.sidebar-menu a').forEach(link => {
     //     if (link.href === window.location.href) {
