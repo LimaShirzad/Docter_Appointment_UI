@@ -139,6 +139,7 @@ async function loadDoctorProfile() {
     const role = sessionStorage.getItem("role");
     const username = sessionStorage.getItem("username");
     const id = sessionStorage.getItem("id");
+    console.log(token);
 
     if (!token) {
         window.location.href = "login.html";

@@ -426,6 +426,7 @@
             
             <form id="loginForm">
                 <div class="form-group">
+                    <p  style="color: red; font-weight: bold; margin: 2px;" id="adminerr"></p>
                     <label for="username">UserName</label>
                     <div class="input-with-icon">
                         <i class="fas fa-user"></i>
@@ -526,15 +527,16 @@
      sessionStorage.setItem("token", data.token);
     sessionStorage.setItem("adminid", data.id);
     sessionStorage.setItem("adminusername", data.username);
-    sessionStorage.setItem("adminrole", data.role);
+    sessionStorage.setItem("adminrole", data.roleId);
 
 
 
-      if (data.role == 80) {
+      if (data.roleId == 80) {
         window.location.href = "dashbord.html";
     } 
     else {
-        alert("Unknown role, cannot redirect");
+        document.getElementById("adminerr").innerHTML=data.BadCredential
+        // alert("Unknown role, cannot redirect");
     }
 
 

@@ -1,11 +1,7 @@
-
-
-    const token = sessionStorage.getItem("token");
-    
-    const role = sessionStorage.getItem("role");
-    const username = sessionStorage.getItem("username");
-    const id = sessionStorage.getItem("id");
-
+ const token = sessionStorage.getItem("token");
+const role = sessionStorage.getItem("role");
+const username = sessionStorage.getItem("username");
+const id = sessionStorage.getItem("id");
 
 
     function logoutPatient() {
@@ -17,20 +13,19 @@
 
 async function loadPatientProfile() {
 
-    // document.getElementById("username").innerText=username;
-    // document.getElementById("role").innerText=role;
-    
+
     console.log(token);
+     document.getElementById("role").innerText=token;
 
-    if (!token) {
-        window.location.href = "login.html";
-        return;
-    }
+    // if (!token) {
+    //     window.location.href = "login.html";
+    //     return;
+    // }
 
-    if (role != 72) {
-        document.getElementById("err").innerText = "Access denied!";
-        return;
-    }
+    // if (role != 72) {
+    //     document.getElementById("err").innerText = "Access denied!";
+    //     return;
+    // }
 
     try {
         const response = await fetch("http://localhost:8080/api/patient/profile", {

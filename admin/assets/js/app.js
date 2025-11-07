@@ -210,6 +210,7 @@ function adminlogout() {
 
 // ================= UPDATE ROLE =================
 document.addEventListener("DOMContentLoaded", async () => {
+  // loadSpecialty(0);
   const updateForm = document.getElementById("updateRoleForm");
   const roleInput = document.getElementById("role");
   const roleIdInput = document.getElementById("roleId");
@@ -278,9 +279,54 @@ document.addEventListener("DOMContentLoaded", async () => {
 let currentPage = 0;
 let pageSize = 3;
 
+// async function loadSpecialty(page) {
+//   try {
+//     const res = await fetch(`http://localhost:8080/api/specialty/all?page=${page}&size=${pageSize}`, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         "Authorization": `Bearer ${token}`
+//       }
+//     });
+
+//     const data = await res.json();
+//     const tbody = document.querySelector("#specialtyTable tbody");
+//     tbody.innerHTML = "";
+
+//     data.content.forEach(specialty => {
+//       tbody.innerHTML += `
+//         <tr>
+//           <td>${specialty.id}</td>
+//           <td>${specialty.title}</td>
+//           <td>
+//             <button class="btn btn-sm btn-outline-warning me-1" onclick="window.location.href='updateSpecialty.html?id=${specialty.id}'"><i class="fas fa-edit"></i></button>
+//             <button class="btn btn-sm btn-outline-danger" onclick="deleteSpecialty(${specialty.id})"><i class="fas fa-trash"></i></button>
+//           </td>
+//         </tr>`;
+//     });
+
+//     const pageDiv = document.querySelector(".pagination");
+//     pageDiv.innerHTML = "";
+//     for (let i = 0; i < data.totalPages; i++) {
+//       pageDiv.innerHTML += `<li class="page-item page-link" onclick="loadSpecialty(${i})">${i + 1}</li>`;
+//     }
+//   } catch (err) {
+//     console.error("Error loading specialties:", err);
+//   }
+// }
+
+// loadSpecialty(currentPage);
+
+// ================= DELETE SPECIALTY =================
+
+
+
+
 async function loadSpecialty(page) {
+  const keyword = document.getElementById("searchInput").value;
+
   try {
-    const res = await fetch(`http://localhost:8080/api/specialty/all?page=${page}&size=${pageSize}`, {
+    const res = await fetch(`http://localhost:8080/api/specialty/all?page=${page}&size=${pageSize}&keyword=${keyword}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -304,19 +350,25 @@ async function loadSpecialty(page) {
         </tr>`;
     });
 
+    // Pagination
     const pageDiv = document.querySelector(".pagination");
     pageDiv.innerHTML = "";
     for (let i = 0; i < data.totalPages; i++) {
-      pageDiv.innerHTML += `<li class="page-item page-link" onclick="loadSpecialty(${i})">${i + 1}</li>`;
+      const li = document.createElement("li");
+      li.classList.add("page-item", "page-link");
+      li.textContent = i + 1;
+      li.onclick = () => loadSpecialty(i);
+      if(i === data.number) li.classList.add("active");
+      pageDiv.appendChild(li);
     }
+
   } catch (err) {
     console.error("Error loading specialties:", err);
   }
 }
 
-loadSpecialty(currentPage);
+// loadSpecialty(4);
 
-// ================= DELETE SPECIALTY =================
 async function deleteSpecialty(id) {
   if (!id) return alert("Invalid ID");
 
@@ -339,6 +391,8 @@ async function deleteSpecialty(id) {
 
 // ================= ADD & UPDATE SPECIALTY =================
 document.addEventListener("DOMContentLoaded", async () => {
+  loadSpecialty(0);
+
   const updateSpecialtyForm = document.getElementById("update_specialty_form");
   const specialtySaveForm = document.getElementById("specialty_form");
   const title = document.getElementById("title");
@@ -450,7 +504,7 @@ async function loadDoctorsWithePagination(page){
     }
 
     const response = await res.json();
-    // console.log("Doctors response:", response);
+    console.log("Doctors response:", response);
 
     const doctors = response.doctors; 
     console.log(doctors);
@@ -514,11 +568,6 @@ async function loadDoctorsWithePagination(page){
     loadDoctorsWithePagination(currentPage);
   });
 
-    // const pageDiv = document.querySelector(".paginationnew");
-    // pageDiv.innerHTML = "";
-    // for (let i = 0; i < data.totalPages; i++) {
-    //   pageDiv.innerHTML += `<li class="page-item page-link" onclick="loadSpecialty(${i})">${i + 1}</li>`;
-    // }
 
   loadDoctorsWithePagination(currentPage);
 
@@ -550,7 +599,7 @@ async function deleteDoctor(id) {
      if(response.ok)
      {
             customAlert("Doctore Remove Suesscfullly","success");
-            loadDoctorsWithePagination(3);
+            loadDoctorsWithePagination(page);
      }else{
                   
     const error = await response.json();

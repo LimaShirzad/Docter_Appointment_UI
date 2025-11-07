@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
                 
+                <a href="adminprofile.html">
                 <div class="header-right">
                    
                     
@@ -87,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                     </div>
                 </div>
+                </a>
             </header>
 
 
@@ -144,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
          
         const data = await response.json();
-        console.log("Doctor Profile:", data);
+        console.log("Admin Profile:", data);
 
 
 
@@ -170,73 +172,6 @@ loadAdminProfile();
 
 
 
-
-
-    //  document.querySelectorAll('.sidebar-menu a').forEach(link => {
-    //     if (link.href === window.location.href) {
-    //         link.classList.add('active');
-    //     }
-    // });
-
-    // document.querySelectorAll('.sidebar-menu a').forEach(link => {
-    //     link.addEventListener('click', function (e) {
-    //         e.preventDefault();
-
-    //         // Remove active from all
-    //         document.querySelectorAll('.sidebar-menu a').forEach(item => {
-    //             item.classList.remove('active');
-    //         });
-
-    //         // Add active to clicked
-    //         this.classList.add('active');
-
-    //         // Close sidebar in mobile
-    //         if (window.innerWidth < 992) {
-    //             document.querySelector('.sidebar').classList.remove('active');
-            // }
-
-            // Navigate to page
-            // window.location.href = this.getAttribute("href");
-        // });
-    // });
-
-
-
-
-// document.addEventListener("DOMContentLoaded", function () {
-
-// });
-
-//  document.getElementById('menu-toggle').addEventListener('click', function() {
-//             document.querySelector('.sidebar').classList.toggle('active');
-//         });
-        
-//         // Navigation between pages
-//         document.querySelectorAll('.sidebar-menu a').forEach(link => {
-//             link.addEventListener('click', function(e) {
-//                 e.preventDefault();
-                
-//                 // Remove active class from all links
-//                 document.querySelectorAll('.sidebar-menu a').forEach(item => {
-//                     item.classList.remove('active');
-//                 });
-                
-//                 // Add active class to clicked link
-//                 this.classList.add('active');
-                
-             
-//                 });
-                
-            
-//                 // Close sidebar on mobile after selection
-//                 if (window.innerWidth < 992) {
-//                     document.querySelector('.sidebar').classList.remove('active');
-//                 }
-//  });
-
-
-          
-        
 
 
 
