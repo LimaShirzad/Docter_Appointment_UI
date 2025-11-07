@@ -47,12 +47,21 @@ document.addEventListener("DOMContentLoaded", function () {
                             <span>Appointments</span>
                         </a>
                     </li>
+
+                      <li>
+                        <a href="diseas.html" >
+                            <span>Diseases</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="#" >
                             <i class="fas fa-cog"></i>
                             <span>Settings</span>
                         </a>
                     </li>
+
+
                 </ul>
             </div>
         </div>
@@ -87,8 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="user-profile">
                         <div class="user-avatar">JD</div>
                         <div class="user-info">
-                            <div class="user-name">John Doe</div>
-                            <div class="user-role">Administrator</div>
+                            <div class="user-name"></div>
+                            <div class="user-role"></div>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Specialty Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+
+        <div id="sidebar_box"></div>
+       
+        <div class="main-content">
+           
+        <div id="header_box"></div>
+
+
+    
+    <div class="specialty-container mt-5">
+        <div class="specialty-card">
+            <div class="specialty-header">
+                <h1 class="specialty-title">Add Diseases</h1>
+                <!-- <p class="specialty-subtitle">Create new specialties for doctor appointments</p> -->
+            </div>
+            
+            <!-- <div class="specialty-icon">
+                <i class="fas fa-stethoscope"></i>
+            </div>
+             -->
+            <div class="specialty-body">
+                <form id="update_specialty_form" class="specialty_form">
+                    <input type="hidden" id="id" name="id" >
+                    <div class="specialty-form-group">
+                        <label for="specialty_name" class="specialty-label">Title</label>
+                        <input 
+                            type="text" 
+                            id="title" 
+                            class="specialty-input" 
+                            name="title">
+
+                        <span id="msg" class="text-danger fw-bold"></span>
+                    </div>
+                    
+                    <button type="submit" class="specialty-btn">
+                        <i class="fas fa-plus-circle"></i> Add Diseases
+                    </button>
+                </form>
+                
+               
+            </div>
+         
+        </div>
+    </div>
+    
+    </div>
+
+
+           
+   <div id="msg_box" class="card"></div>
+                   
+<!-- <script src="assets/js/app.js"></script> -->
+
+<script src="assets/js/dashbord.js"></script>
+
+<script src="assets/js/comman.js"></script>
+
+</body>
+</html>
