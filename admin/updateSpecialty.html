@@ -60,12 +60,148 @@
 
            
    <div id="msg_box" class="card"></div>
+                  
+   
+
+<!-- 
+<script>
+
+    const token = sessionStorage.getItem("token");
+
+    document.addEventListener("DOMContentLoaded", async () => {
+//  msg.innerHTML="";
+       
+    const updateSpecialtyForm=document.getElementById("update_specialty_form");
+    const title=document.getElementById("title");
+    const specialtyIdInput=document.getElementById("id");
+
+
+
+
+    const specialty_id=new URLSearchParams(window.location.search).get("id");
+
+    console.log(specialty_id);
+
+    const getSpecialty_URL=`http://localhost:8080/api/specialty/${specialty_id}`;
+
+   
+    // if (!specialty_id) {
+
+    //     // msg.innerHTML="";
+    //     msg.innerText = "No Specialty ID provided!";
+    //     msg.style.color = "red";
+    //     return;
+    // }
+
+
+    try{
+        const res = await fetch(getSpecialty_URL,{
+
+             headers: {
+                // "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        if (!res.ok) throw new Error("Failed to load Speclaity");
+
+        const data = await res.json();
+        title.value = data.title;  
+        specialtyIdInput.value = data.id;  
+
+    }catch {
+        msg.innerText = "Error loading Specialty!";
+        msg.style.color = "red";
+        return;
+    }
+   
+
+
+          
+ updateSpecialtyForm.onsubmit = async e => {
+
+                    e.preventDefault();
+
+                       msg.innerText = "";
+                       msgBox.innerText = "";
+                       const updateSpecialty_URL=(`http://localhost:8080/api/specialty/${specialty_id}`);
+
+                    
+        try {
+            const res = await fetch(updateSpecialty_URL,{
+                method: "PUT",
+                headers: { 
+                                 "Content-Type": "application/json" ,
+                                 "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({ title: title.value })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                let errorMessage = "";
+                if (data.errors) {
+                    for (const field in data.errors) {
+                        errorMessage += `${data.errors[field]} `;
+                    }
+                }
+                if (data.message) {
+                    errorMessage += data.message;
+                }
+                msg.innerText = errorMessage || "Update failed!";
+                msg.style.color = "red";
+            } else {
+                msgBox.innerText = "Specialty Updated Successfully!";
+                msgBox.style.right = "0";
+                window.location.href = "specialties.html";
+
+                setTimeout(() => {
+                    msgBox.style.right = "-100%";
+                    window.location.href = "specialties.html";
+                }, 3000);
+            }
+
+        } catch {
+            msg.innerText = "Network error!";
+            msg.style.color = "red";
+        }
+
+                    
+
+
                    
+                  
+
+
+           }
+
+        
+});
+
+</script> -->
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="assets/js/app.js"></script>
 
 <script src="assets/js/dashbord.js"></script>
 
 <script src="assets/js/comman.js"></script>
+
+
+
+
+
+
 
 </body>
 </html>

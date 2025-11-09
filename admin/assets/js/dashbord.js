@@ -50,14 +50,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                       <li>
                         <a href="diseas.html" >
+                         <i class="fas fa-procedures"></i>
                             <span>Diseases</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="#" >
-                            <i class="fas fa-cog"></i>
-                            <span>Settings</span>
+                        <a href="#" onclick="adminlogout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                           
+                            <span>Logout</span>
                         </a>
                     </li>
 
@@ -82,25 +84,21 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 </div>
                 
+                <a href="adminprofile.html">
                 <div class="header-right">
-                    <div class="notification-icon">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge">3</span>
-                    </div>
-                    
-                    <div class="messages-icon">
-                        <i class="fas fa-envelope"></i>
-                        <span class="badge">5</span>
-                    </div>
+                   
                     
                     <div class="user-profile">
-                        <div class="user-avatar">JD</div>
+                        <div class="user-avatar">
+                          <img src="" id="adminImage" style="height:50px; width:50px; border-radius: 50px;" >
+                        </div>
                         <div class="user-info">
-                            <div class="user-name"></div>
-                            <div class="user-role"></div>
+                            <div class="user-name"><span id="adminfirstname"></span>  <span id="adminlastname"></span></div>
+                            <div class="user-role" id="role"></div>
                         </div>
                     </div>
                 </div>
+                </a>
             </header>
 
 
@@ -143,71 +141,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-    //  document.querySelectorAll('.sidebar-menu a').forEach(link => {
-    //     if (link.href === window.location.href) {
-    //         link.classList.add('active');
-    //     }
-    // });
 
-    // document.querySelectorAll('.sidebar-menu a').forEach(link => {
-    //     link.addEventListener('click', function (e) {
-    //         e.preventDefault();
 
-    //         // Remove active from all
-    //         document.querySelectorAll('.sidebar-menu a').forEach(item => {
-    //             item.classList.remove('active');
-    //         });
+    async function loadAdminProfile() {
 
-    //         // Add active to clicked
-    //         this.classList.add('active');
 
-    //         // Close sidebar in mobile
-    //         if (window.innerWidth < 992) {
-    //             document.querySelector('.sidebar').classList.remove('active');
-            // }
+    try {
+        const response = await fetch("http://localhost:8080/api/dashboard/adminprofile", {
+            method: "GET",
+            headers: { "Authorization": "Bearer " + token }
+        });
 
-            // Navigate to page
-            // window.location.href = this.getAttribute("href");
-        // });
-    // });
+        if (!response.ok) throw new Error("Failed to fetch admin profile");
+
+         
+        const data = await response.json();
+        console.log("Admin Profile:", data);
 
 
 
+          if (data.profilePicture) {
+            document.getElementById("adminImage").src =
+                "data:image/png;base64," + data.profilePicture;
+        }
 
-// document.addEventListener("DOMContentLoaded", function () {
-
-// });
-
-//  document.getElementById('menu-toggle').addEventListener('click', function() {
-//             document.querySelector('.sidebar').classList.toggle('active');
-//         });
-        
-//         // Navigation between pages
-//         document.querySelectorAll('.sidebar-menu a').forEach(link => {
-//             link.addEventListener('click', function(e) {
-//                 e.preventDefault();
-                
-//                 // Remove active class from all links
-//                 document.querySelectorAll('.sidebar-menu a').forEach(item => {
-//                     item.classList.remove('active');
-//                 });
-                
-//                 // Add active class to clicked link
-//                 this.classList.add('active');
-                
-             
-//                 });
-                
-            
-//                 // Close sidebar on mobile after selection
-//                 if (window.innerWidth < 992) {
-//                     document.querySelector('.sidebar').classList.remove('active');
-//                 }
-//  });
+          document.getElementById("adminfirstname").innerHTML=data.firstName;
+          document.getElementById("adminlastname").innerHTML=data.lastName;
+          document.getElementById("role").innerHTML=data.role;
 
 
-          
-        
+    } catch (err) {
+        console.error("Error:", err.message);
+        document.getElementById("err").innerText = err.message;
+    }
+}
+
+loadAdminProfile();
+
+
+
+
+
 
 
 

@@ -4,23 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Disease Selector</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    <link rel="stylesheet" href="assets/css/doctorDashbord.css">
+  
+   
+<style>
+  
+   
         
         .container {
             width: 100%;
@@ -164,7 +155,117 @@
         .option.selected i {
             color: #4361ee;
         }
+             .datetime-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
         
+        .datetime-group {
+            flex: 1;
+        }
+        
+        .datetime-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 8px;
+            margin-left: 5px;
+        }
+        
+        .custom-input {
+            position: relative;
+            width: 100%;
+        }
+        
+        .custom-input input {
+            width: 100%;
+            padding: 16px 20px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            color: #334155;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .custom-input input:hover {
+            border-color: #cbd5e1;
+        }
+        
+        .custom-input input:focus {
+            outline: none;
+            border-color: #4361ee;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        }
+
+
+
+        .custom-input {
+    position: relative;
+    width: 100%;
+}
+
+.custom-input input[type="date"],
+.custom-input input[type="time"] {
+    width: 100%;
+    padding: 16px 50px 16px 20px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #334155;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.custom-input input[type="date"]::-webkit-calendar-picker-indicator,
+.custom-input input[type="time"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+.custom-input i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+
+   
+             #takeAppointmentBtn {
+            width: 100%;
+            padding: 16px;
+            background: #4361ee;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+        }
+        
+        #takeAppointmentBtn:hover {
+            background: #3a56d4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
         .selected-value {
             display: flex;
             align-items: center;
@@ -187,11 +288,22 @@
             margin-right: 8px;
             color: #4361ee;
         }
-    </style>
+    </style> 
 </head>
 <body>
-    
-    <div class="container">
+
+   <div class="dashboard-wrapper">
+
+   <div id="dashbord_box"></div>
+
+      
+            <div class="main-content">
+
+            <div id="header_box"></div>
+
+
+
+    <div class="container mt-4">
         <div class="header">
             <i class="fas fa-stethoscope"></i>
             <h1>Health Condition</h1>
@@ -203,74 +315,51 @@
                 <div class="select-trigger">
                     <span class="selected-value">
                         <i class="fas fa-heartbeat"></i>
-                        <span class="placeholder">Choose a health condition</span>
+                        <span class="splaceholder">Choose a health condition</span>
                     </span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="options-container">
-                    <div class="option" data-value="hypertension">
-                        <i class="fas fa-tint"></i>
-                        <span>Hypertension</span>
-                    </div>
-                    <div class="option" data-value="diabetes">
-                        <i class="fas fa-syringe"></i>
-                        <span>Diabetes</span>
-                    </div>
-                    <div class="option" data-value="asthma">
-                        <i class="fas fa-wind"></i>
-                        <span>Asthma</span>
-         
                   
                 </div>
+                
             </div>
+
+              <div class="datetime-container">
+            <div class="datetime-group">
+                <label class="datetime-label">Select Date</label>
+                <div class="custom-input">
+                    <input type="date" id="date" name="date">
+                    <i class="far fa-calendar-alt"></i>
+                </div>
+            </div>
+            
+            <div class="datetime-group">
+                <label class="datetime-label">Select Time</label>
+                <div class="custom-input">
+                    <input type="time" id="time" name="time">
+                    <i class="far fa-clock"></i>
+                </div>
+            </div>
+        </div>
+        
+
+             <button class="btn btn-primary mt-4" id="takeAppointmentBtn">TakeAppoinment</button>
         </div>
         
       
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const selectTrigger = document.querySelector('.select-trigger');
-            const optionsContainer = document.querySelector('.options-container');
-            const options = document.querySelectorAll('.option');
-            const selectedValue = document.querySelector('.selected-value .placeholder');
-            const selectedIcon = document.querySelector('.selected-value i');
-            
-            // Toggle dropdown
-            selectTrigger.addEventListener('click', function() {
-                optionsContainer.classList.toggle('active');
-                selectTrigger.classList.toggle('active');
-            });
-            
-            // Select option
-            options.forEach(option => {
-                option.addEventListener('click', function() {
-                    const value = this.getAttribute('data-value');
-                    const text = this.querySelector('span').textContent;
-                    const iconClass = this.querySelector('i').className;
-                    
-                    // Update selected value
-                    selectedValue.textContent = text;
-                    selectedIcon.className = iconClass;
-                    
-                    // Mark option as selected
-                    options.forEach(opt => opt.classList.remove('selected'));
-                    this.classList.add('selected');
-                    
-                    // Close dropdown
-                    optionsContainer.classList.remove('active');
-                    selectTrigger.classList.remove('active');
-                });
-            });
-            
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!selectTrigger.contains(e.target)) {
-                    optionsContainer.classList.remove('active');
-                    selectTrigger.classList.remove('active');
-                }
-            });
-        });
-    </script>
+      </div>  
+
+     
+        <script src="assets/js/script.js"></script>
+        <script src="assets/js/patientdashbord.js"></script>
+
+
+
+
+
+
 </body>
 </html>

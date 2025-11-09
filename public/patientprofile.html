@@ -6,7 +6,11 @@
     <title>Patient Profile | Doctor Appointment System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
+      <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+    <link rel="stylesheet" href="assets/css/doctorDashbord.css">
+   
+   
+   <style>
         body {
             background-color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -65,16 +69,33 @@
     </style>
 </head>
 <body>
+
+
+    
+   <div class="dashboard-wrapper">
+
+   <div id="dashbord_box"></div>
+
+      
+            <div class="main-content">
+
+            <div id="header_box"></div>
+
+
     <div class="container py-5">
+        
+<!-- <h1 id="ali"></h1> -->
+
+
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <div class="profile-card bg-white">
                     <div class="profile-header">
                         <div class="mb-4">
-                            <img src="https://ui-avatars.com/api/?name=John+Doe&size=200&background=random" class="profile-img" alt="Patient Profile Picture">
+                            <img src="" class="profile-img"  id="profilePicture" alt="Patient Profile Picture">
                         </div>
-                        <h2>John Doe</h2>
-                        <p class="mb-0">Patient ID: PT-2023-0876</p>
+
+                        <p class="mb-0" >ID <span id="id"></span></p>
                     </div>
 
                     <div class="profile-info">
@@ -86,36 +107,27 @@
                         <div class="row">
                             <div class="col-md-6 info-group">
                                 <div class="info-label">First Name</div>
-                                <div class="info-value">John</div>
+                                <div class="info-value" id="profirstName"></div>
                             </div>
                             <div class="col-md-6 info-group">
                                 <div class="info-label">Last Name</div>
-                                <div class="info-value">Doe</div>
+                                <div class="info-value" id="prolastName"></div>
                             </div>
                             <div class="col-md-6 info-group">
                                 <div class="info-label">Email Address</div>
-                                <div class="info-value">john.doe@example.com</div>
+                                <div class="info-value" id="email"></div>
                             </div>
-                            <div class="col-md-6 info-group">
-                                <div class="info-label">Phone Number</div>
-                                <div class="info-value">(555) 123-4567</div>
-                            </div>
+                       
                             <div class="col-md-6 info-group">
                                 <div class="info-label">Gender</div>
-                                <div class="info-value">Male</div>
+                                <div class="info-value" id="gender"></div>
                             </div>
-                            <div class="col-md-6 info-group">
-                                <div class="info-label">Date of Birth</div>
-                                <div class="info-value">January 15, 1985</div>
-                            </div>
+                         
                             <div class="col-md-6 info-group">
                                 <div class="info-label">Blood Group</div>
-                                <div class="info-value"><span class="badge bg-danger">O+</span></div>
+                                <div class="info-value"><span class="badge bg-danger" id="bloodGroup"></span></div>
                             </div>
-                            <div class="col-md-6 info-group">
-                                <div class="info-label">Role</div>
-                                <div class="info-value">Patient</div>
-                            </div>
+                         
                         </div>
 
                         <h4 class="section-title mt-5">Account Information</h4>
@@ -123,61 +135,49 @@
                         <div class="row">
                             <div class="col-md-6 info-group">
                                 <div class="info-label">Username</div>
-                                <div class="info-value">johndoe_85</div>
+                                <div class="info-value" id="userName"></div>
                             </div>
                             <div class="col-md-6 info-group">
                                 <div class="info-label">Password</div>
-                                <div class="info-value">•••••••••••</div>
+                                <div class="info-value" id="password"></div>
                             </div>
                         </div>
 
-                        <h4 class="section-title mt-5">Medical Information</h4>
-                        
-                        <div class="row">
-                            <div class="col-md-6 info-group">
-                                <div class="info-label">Primary Physician</div>
-                                <div class="info-value">Dr. Sarah Johnson</div>
-                            </div>
-                            <div class="col-md-6 info-group">
-                                <div class="info-label">Last Visit</div>
-                                <div class="info-value">June 15, 2023</div>
-                            </div>
-                            <div class="col-md-12 info-group">
-                                <div class="info-label">Known Allergies</div>
-                                <div class="info-value">Penicillin, Pollen</div>
-                            </div>
-                            <div class="col-md-12 info-group">
-                                <div class="info-label">Current Medications</div>
-                                <div class="info-value">Lisinopril 10mg daily, Metformin 500mg twice daily</div>
-                            </div>
-                        </div>
-
-                        <h4 class="section-title mt-5">Emergency Contact</h4>
-                        
-                        <div class="row">
-                            <div class="col-md-6 info-group">
-                                <div class="info-label">Name</div>
-                                <div class="info-value">Jane Doe</div>
-                            </div>
-                            <div class="col-md-6 info-group">
-                                <div class="info-label">Relationship</div>
-                                <div class="info-value">Spouse</div>
-                            </div>
-                            <div class="col-md-6 info-group">
-                                <div class="info-label">Phone Number</div>
-                                <div class="info-value">(555) 987-6543</div>
-                            </div>
-                            <div class="col-md-6 info-group">
-                                <div class="info-label">Email Address</div>
-                                <div class="info-value">jane.doe@example.com</div>
-                            </div>
-                        </div>
+                       
+                     
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+
+    </div>
+
+    </div>
+
+
+
+
+
+
+    <script src="assets/js/script.js"></script>
+        <script src="assets/js/patientdashbord.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

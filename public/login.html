@@ -363,18 +363,18 @@
                 <button type="submit" class="btn btn-login mb-3">Sign In</button>
             </form>
             
-            <div class="divider">
+            <!-- <div class="divider">
                 <span>Or continue with</span>
-            </div>
+            </div> -->
             
-            <div class="social-login">
+            <!-- <div class="social-login">
                 <a href="#" class="btn btn-social btn-google">
                     <i class="fab fa-google"></i> Google
                 </a>
                 <a href="#" class="btn btn-social btn-github">
                     <i class="fab fa-github"></i> GitHub
                 </a>
-            </div>
+            </div> -->
             
             <div class="login-footer">
                 Don't have an account? <a href="userRegistration.html">Sign up here</a>
@@ -409,6 +409,7 @@
 
     let username=document.getElementById("username").value;
     let password=document.getElementById("password").value;
+    let errmesg=document.getElementById("msg");
 
     let res = await fetch("http://localhost:8080/auth/login", {
     method: "POST",
@@ -427,17 +428,22 @@
 
      sessionStorage.setItem("token", data.token);
     sessionStorage.setItem("id", data.id);
-    sessionStorage.setItem("username", data.username);
-    sessionStorage.setItem("role", data.role);
+    sessionStorage.setItem("username", data.userName);
+    sessionStorage.setItem("role", data.roleId);
 
 
-      if (data.role == 1) {
+      if (data.roleId == 1) {
         window.location.href = "doctorDashboard.html";
-    } else if (data.role == 72) {
+    } else if (data.roleId == 72) {
         window.location.href = "patientDashbord.html";
         // window.location.href = "takeappoinment.html";
     } else {
-        alert("Unknown role, cannot redirect");
+
+        errmesg.innerText=data.BadCredential;
+        errmesg.style.color="red";
+
+        alert(data.BadCredential);
+        console.log(data.BadCredential);
     }
 
 

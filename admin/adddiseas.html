@@ -31,10 +31,9 @@
             </div>
              -->
             <div class="specialty-body">
-                <form id="update_specialty_form" class="specialty_form">
-                    <input type="hidden" id="id" name="id" >
+                <form id="adddiseas_form" class="adddiseas_form">
                     <div class="specialty-form-group">
-                        <label for="specialty_name" class="specialty-label">Title</label>
+                        <label for="diseas" class="diseas-label">Title</label>
                         <input 
                             type="text" 
                             id="title" 
@@ -60,12 +59,50 @@
 
            
    <div id="msg_box" class="card"></div>
-                   
-<!-- <script src="assets/js/app.js"></script> -->
+
+
+             
+<script src="assets/js/app.js"></script>
 
 <script src="assets/js/dashbord.js"></script>
 
-<script src="assets/js/comman.js"></script>
+   <!-- <script>
+    const adddiseaSaveform=document.getElementById("adddiseas_form");
+
+    const errmsg=document.getElementById("msg");
+  if (adddiseaSaveform) {
+    adddiseaSaveform.addEventListener("submit", async e => {
+      e.preventDefault();
+      errmsg.innerText = "";
+      const title = document.getElementById("title").value;
+
+      const res = await fetch("http://localhost:8080/api/diseas/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ title: title })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        if (data.errors?.title) errmsg.innerText = data.errors.title;
+        else errmsg.innerText = data.message || "Error saving specialty!";
+      } else {
+        msgBox.innerText = "New Dises Added Successfully";
+        msgBox.style.right = 0;
+        adddiseaSaveform.reset();
+      }
+
+      setTimeout(() => {
+        msgBox.style.right = "-100%";
+      }, 4000);
+    });
+  }
+
+   </script> -->
+      
 
 </body>
 </html>

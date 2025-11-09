@@ -70,9 +70,11 @@
 <div id="msg_box" class="card"></div>
  
 
+
+
+<script src="assets/js/app.js"></script>
 <script src="assets/js/comman.js"></script>
 <script src="assets/js/dashbord.js"></script>
-<script src="assets/js/app.js"></script>
 
 
 
@@ -80,90 +82,7 @@
 
 
 
-<script>
-document.addEventListener("DOMContentLoaded", async () => {
 
-    const updateForm = document.getElementById("updateRoleForm");
-    const roleInput = document.getElementById("role");
-    const roleIdInput = document.getElementById("roleId");
-    const msg = document.getElementById("msg");
-    const msgBox = document.getElementById("msg_box");
-
-    // 1. Get role ID from URL
-    const roleId = new URLSearchParams(window.location.search).get("id");
-
-    if (!roleId) {
-        msg.innerText = "No role ID provided!";
-        msg.style.color = "red";
-        return;
-    }
-
-    // 2. Load existing role and show in input
-    try {
-        const res = await fetch(`http://localhost:8080/api/roles/${roleId}`);
-        if (!res.ok) throw new Error("Failed to load role");
-
-        const data = await res.json();
-        roleInput.value = data.role;   // show role name
-        roleIdInput.value = data.id;   // store role ID (hidden)
-    } catch {
-        msg.innerText = "Error loading role!";
-        msg.style.color = "red";
-        return;
-    }
-
-    // 3. Handle form submit
-    updateForm.onsubmit = async e => {
-        e.preventDefault();
-        msg.innerText = "";
-        msgBox.innerText = "";
-
-        try {
-            const res = await fetch(`http://localhost:8080/api/roles/${roleId}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ role: roleInput.value })
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                // Combine all possible error messages
-                let errorMessage = "";
-                if (data.errors) {
-                    for (const field in data.errors) {
-                        errorMessage += `${data.errors[field]} `;
-                    }
-                }
-                if (data.message) {
-                    errorMessage += data.message;
-                }
-                msg.innerText = errorMessage || "Update failed!";
-                msg.style.color = "red";
-            } else {
-                msgBox.innerText = "Role Updated Successfully!";
-                msgBox.style.right = "0";
-                window.location.href = "userRoles.html";
-
-                setTimeout(() => {
-                    msgBox.style.right = "-100%";
-                    window.location.href = "userRoles.html";
-                }, 3000);
-            }
-
-        } catch {
-            msg.innerText = "Network error!";
-            msg.style.color = "red";
-        }
-    };
-
-    // 4. Cancel button
-    document.getElementById("role_cancel_btn").onclick = () => {
-        window.location.href = "userRoles.html";
-    };
-
-});
-</script>
 
 
 <script src="assets/js/comman.js"></script>

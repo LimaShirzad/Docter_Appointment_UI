@@ -91,54 +91,13 @@
     
 
 
-<script src="assets/js/comman.js"></script>
-<script src="assets/js/dashbord.js"></script>
+
+
 <script src="assets/js/app.js"> </script>
-
- <script>
-
-        async function loadRoles() {
-
-            const res=await fetch('http://localhost:8080/api/roles');
-
-            const roles=await res.json();
-
-            const tbody=document.getElementById("roleTable").querySelector("tbody");
-            tbody.innerHTML='';
-            
-            roles.forEach(role => {
-
-                    const row=document.createElement('tr');
-
-                    row.innerHTML +=`
-
-                                <td>${role.id}</td>
-                                <td>${role.role}</td>
-
-                                 <td>
-                                                <button class="btn btn-sm btn-outline-primary me-1" ><i class="fas fa-eye"></i></button>
-<button class="btn btn-sm btn-outline-warning me-1" onclick="window.location.href='updateRole.html?id=${role.id}'"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteRole(${role.id})"><i class="fas fa-trash"></i></button>
-                                 </td>
+<!-- <script src="assets/js/comman.js"></script> -->
+<script src="assets/js/dashbord.js"></script>
 
 
-                    
-                    
-                    
-                    `;
-
-                    tbody.appendChild(row);
-                
-                
-            });
-        }
-
-
-loadRoles();
-
-
-
-</script>  
 
 
 

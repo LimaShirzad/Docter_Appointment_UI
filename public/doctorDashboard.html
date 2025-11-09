@@ -130,7 +130,7 @@
 
      
         function logoutDoctor() {
-    sessionStorage.clear(); // clears only this doctor’s session
+    sessionStorage.clear(); 
     window.location.href = "login.html";
 }
 
@@ -139,6 +139,7 @@ async function loadDoctorProfile() {
     const role = sessionStorage.getItem("role");
     const username = sessionStorage.getItem("username");
     const id = sessionStorage.getItem("id");
+    console.log(token);
 
     if (!token) {
         window.location.href = "login.html";
@@ -150,10 +151,6 @@ async function loadDoctorProfile() {
         return;
     }
 
-    // document.getElementById("username").innerText = username;
-    // document.getElementById("role").innerText = role;
-    // document.getElementById("id").innerText = id;
-    // document.getElementById("token").innerText = token;
 
     try {
         const response = await fetch("http://localhost:8080/api/doctors/profile", {
@@ -182,16 +179,6 @@ async function loadDoctorProfile() {
         firstName.innerText=data.firstName;
         lastName.innerText=data.lastName;
         specialty.innerText=data.specialty;
-
-
-
-
-
-
-
-
-
-
 
     } catch (err) {
         console.error("Error:", err.message);
