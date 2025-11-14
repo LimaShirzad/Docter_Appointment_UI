@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
 
         const diseases = await response.json();
-        // console.log("Loaded Diseases:", diseases);
+        console.log("Loaded Diseases:", diseases);
 
         // ✅ Clear old options
         optionsContainer.innerHTML = "";
@@ -189,6 +189,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             let date=document.getElementById("date").value;
             let time=document.getElementById("time").value;
 
+            let appointmentErr=document.getElementById("appointment_err");
+
             const appointmentData = {
                 doctorId: doctorId,
                 patientId: patientId,
@@ -214,17 +216,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const errText = await saveResponse.text();
                 alert(" Failed to save appointment: " + errText);
                 console.log(errText);
+
             }
+
+
+
         });
-
-
-
-
-
-
-
-
-
 
 
 

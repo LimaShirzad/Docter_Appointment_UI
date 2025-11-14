@@ -131,13 +131,20 @@
 <script>
 
 
+
 const param=new URLSearchParams(window.location.search);
 const id=param.get("id");
 let userId=document.getElementById("userId");
+        const username = sessionStorage.getItem("registrationUserName");
+              const password = sessionStorage.getItem("registrationPassword");
+
+                console.log(username);
+                console.log(password);
 
 userId.value=id;
 let msgBox=document.getElementById("box");
 let success_msg=document.getElementById("success-msg");
+
 
 
    document.getElementById('saveDoctorForm').addEventListener('submit', async function(e) {
@@ -181,15 +188,47 @@ let success_msg=document.getElementById("success-msg");
                 // msg.innerText="";
         form.reset();
         // window.location.href="userRegistration.html";
+
+                     const loginResponse = await fetch("http://localhost:8080/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: username, password: password })
+    });
+
+    if (!loginResponse.ok) {
+      console.error("Login failed after registration");
+      return;
     }
 
+    const loginData = await loginResponse.json();
+    console.log("Login data:", loginData);
+    
+    // 4️⃣ Store user data in session
+    sessionStorage.setItem("token", loginData.token);
+    sessionStorage.setItem("id", loginData.id);
+    sessionStorage.setItem("username", loginData.userName);
+    sessionStorage.setItem("role", loginData.roleId);
 
-      setInterval(() => {
-                msgBox.style.display="none";
+
+            // }
+
+             if(response.ok){
 
                 
-            }, 4000);
+          setTimeout(() => {
+    msgBox.style.display="none";
+    window.location.href = "doctorDashboard.html";
+}, 2000);
 
+    //   setInterval(() => {
+    //             msgBox.style.display="none";
+    //            window.location.href = "doctorDashboard.html";
+
+                
+    //         }, 4000);
+
+             }
+            }
             
 });
 

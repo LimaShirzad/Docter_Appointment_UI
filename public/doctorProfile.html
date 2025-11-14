@@ -61,7 +61,7 @@
 
                               <div class="col-md-6 doctor_info-group">
                                 <div class="info-label">Experience Year</div>
-                                <div class="info-value" id="experience"></div>
+                                <div class="info-value" id="experience"> </div>
                             </div>
                         
                              <div class="col-md-6 doctor_info-group">
@@ -70,8 +70,13 @@
                             </div>
 
                              <div class="col-md-6 doctor_info-group">
-                                <div class="info-label">Education Year</div>
+                                <div class="info-label">Education </div>
                                 <div class="info-value" id="education"></div>
+                            </div>
+
+                              <div class="col-md-6 doctor_info-group">
+                                <div class="info-label">Graduation Year </div>
+                                <div class="info-value" id="education_year"></div>
                             </div>
                         
                           
@@ -167,11 +172,14 @@ async function loadDoctorProfile() {
         const email=document.getElementById("email").innerHTML=data.email;
         const gender=document.getElementById("gender").innerHTML=data.gender;
         const address=document.getElementById("address").innerHTML=data.address;
-        const experience=document.getElementById("experience").innerHTML=data.experienceYear;
+        // const experience=document.getElementById("experience").innerHTML=data.experienceYear;
+        experience.innerHTML=data.experienceYear + "   year";
         const university=document.getElementById("university").innerHTML=data.universityName;
         const education=document.getElementById("education").innerHTML=data.education;
         const username=document.getElementById("username").innerHTML=data.userName;
         const password=document.getElementById("password").innerHTML=data.password;
+        const educationYear=document.getElementById("education_year").innerHTML=data.graduationYear;
+        // education_year
         const newid=document.getElementById("id").innerHTML=id;
 
         firstName.innerText=data.firstName;
@@ -185,6 +193,13 @@ async function loadDoctorProfile() {
 }
 
 loadDoctorProfile();
+
+
+function logoutDoctor(){
+         sessionStorage.clear(); 
+    window.location.href = "login.html";
+}
+
 
 
 </script>

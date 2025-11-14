@@ -565,7 +565,7 @@ async function loadDoctorsWithePagination(page){
     doctors.forEach(d=>{
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${d.id}</td>
+      
          <td>${d.profilePicture ? `<img src="data:image/png;base64,${d.profilePicture}" class="rounded-circle me-3"  height="40" width="50"/>` : ""}</td>
 
         <td>${d.firstName}</td>
@@ -575,7 +575,7 @@ async function loadDoctorsWithePagination(page){
         <td>${d.education}</td>
         <td>${d.universityName}</td>
      
-        <td>${d.experienceYear || ""}</td>
+        <td>${d.experienceYear || ""} Year</td>
 
            <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-eye" onclick="window.location.href='viewDoctore.html?id=${d.id}'"></i></button>
           <button class="btn btn-sm btn-outline-danger" onclick="deleteDoctor(${d.id})"><i class="fas fa-trash"></i></button>
@@ -645,7 +645,7 @@ async function deleteDoctor(id) {
      if(response.ok)
      {
             customAlert("Doctore Remove Suesscfullly","success");
-            loadDoctorsWithePagination(page);
+            loadDoctorsWithePagination(currentPage);
      }else{
                   
     const error = await response.json();
@@ -654,7 +654,7 @@ async function deleteDoctor(id) {
 
      }
 
-
+      //  loadDoctorsWithePagination(page);
 }
 
 

@@ -44,6 +44,7 @@ document.getElementById("registrationForm").addEventListener("submit", async fun
 
     const form = e.target;
 
+    // msg_err
     const formData = new FormData(form);
 
     try {
@@ -54,8 +55,37 @@ document.getElementById("registrationForm").addEventListener("submit", async fun
 
         const data = await response.json();
 
-
         console.log(data);
+
+    form.querySelectorAll('.msg_err').forEach(span => span.innerText = '');
+
+    if (data.status === "error" && data.errors) {
+    const errors = data.errors;
+    for (const field in errors) {
+        const input = form.querySelector(`[name="${field}"]`);
+        if (input) {
+        
+            const span = input.parentNode.querySelector('.msg_err');
+            if (span) span.innerText = errors[field]; 
+        }
+    }
+
+}
+if (data.status === "error" && data.message) {
+    document.getElementById("globalError").innerText = data.message;
+    return; // مهمه ده چې نور کوډ نه چلېږي
+}
+
+   
+        // After user fills registration form and submits
+        const typedUsername = document.getElementById("userName").value;
+        const typedPassword = document.getElementById("password").value;
+
+        // store plain password for auto-login
+        sessionStorage.setItem("registrationUserName", typedUsername);
+        sessionStorage.setItem("registrationPassword", typedPassword);
+
+
 
         if(data.user.roleId==1)
          {
@@ -85,7 +115,5 @@ document.getElementById("registrationForm").addEventListener("submit", async fun
 
 
 // ===========================emd of save doctore===============
-
-
 
 
