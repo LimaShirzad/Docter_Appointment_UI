@@ -36,8 +36,8 @@
 
                     <div class="doctor_profile-info">
                         <div class="d-flex justify-content-between align-items-center mb-4">
-                            <button class="  btn btn-success m-1" style="border-radius: 12px;">ACCEPT</button>
-                            <button class=" btn btn-danger m-1 "   style="border-radius: 12px;">REMOVE</button>
+                            <button class="  btn btn-success m-1" style="border-radius: 12px;"></button>
+                            <button class=" btn btn-danger m-1 "   style="border-radius: 12px;"></button>
                         </div>
 
                         <div class="row">
@@ -75,6 +75,11 @@
                             <div class="col-md-6 doctor_info-group">
                                 <div class="info-label">Specialty</div>
                                 <div class="info-value" id="specialty"></div>
+                            </div>
+
+                             <div class="col-md-6 doctor_info-group">
+                                <div class="info-label">Status</div>
+                                <div class="info-value" id="status"></div>
                             </div>
                         
                           
@@ -117,31 +122,50 @@
      });
 
      const data= await response.json();
+    console.log("Doctors response:", response.status);
 
 
+
+     console.log(data);
       
               if (data.profilePicture) {
                     document.getElementById("doctorprofileImage").src =
-                        "data:image/png;base64," + data.profilePicture;
+                        "data:image/png;base64," + data.doctor.profilePicture;
                 }
 
 
     //  console.log(data);
 
-        const specialty=document.getElementById("specialty").innerHTML=data.specialty;
+        const specialty=document.getElementById("specialty").innerHTML=data.doctor.specialty;
 
-        const docfirstName=document.getElementById("docfirstName").innerHTML=data.firstName;
-        const doclastName=document.getElementById("doclastName").innerHTML=data.lastName;
-        const email=document.getElementById("email").innerHTML=data.email;
-        const gender=document.getElementById("gender").innerHTML=data.gender;
-        const address=document.getElementById("address").innerHTML=data.address;
-        const experience=document.getElementById("experience").innerHTML=data.experienceYear;
-        const university=document.getElementById("university").innerHTML=data.universityName;
-        const education=document.getElementById("education").innerHTML=data.education;
+        const docfirstName=document.getElementById("docfirstName").innerHTML=data.doctor.firstName;
+        const doclastName=document.getElementById("doclastName").innerHTML=data.doctor.lastName;
+        const email=document.getElementById("email").innerHTML=data.doctor.email;
+        const gender=document.getElementById("gender").innerHTML=data.doctor.gender;
+        const address=document.getElementById("address").innerHTML=data.doctor.address;
+        const experience=document.getElementById("experience").innerHTML=data.doctor.experienceYear;
+        const university=document.getElementById("university").innerHTML=data.doctor.universityName;
+        const education=document.getElementById("education").innerHTML=data.doctor.education;
         const newid=document.getElementById("id").innerHTML=docotor_id;
+        const status=document.getElementById("status").innerHTML=data.doctor.accepted;
+        // status
 
-        document.querySelector(".btn-success").setAttribute("data-id", data.id);
-document.querySelector(".btn-danger").setAttribute("data-id", data.id);
+        document.querySelector(".btn-success").setAttribute("data-id", data.doctor.id);
+          document.querySelector(".btn-danger").setAttribute("data-id", data.doctor.id);
+
+const acceptBtn = document.querySelector(".btn-success");
+const rejectBtn = document.querySelector(".btn-danger");
+
+// Set text from API ENUM list
+acceptBtn.innerHTML = data.status[0];   // ACCEPT
+rejectBtn.innerHTML = data.status[1];   // REJECT
+
+// Attach the same values to buttons
+acceptBtn.value = data.status[0];
+rejectBtn.value = data.status[1];
+
+
+
 
 // optional: show id in console
 console.log("Doctor ID set on buttons:", data.id);
@@ -161,6 +185,82 @@ console.log("Doctor ID set on buttons:", data.id);
     getDocotor();
 
 
+
+
+
+// document.querySelector(".btn-success").addEventListener("click", async function () {
+
+//     const id = this.getAttribute("data-id"); // doctor userId
+//     const statusValue = this.value; // ACCEPT
+
+//     const response = await fetch(`http://localhost:8080/api/dashboard/doctor/update-status/${id}`, {
+//         method: "PUT",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Authorization": `Bearer ${token}`
+//         },
+//         body: JSON.stringify(statusValue)
+//     });
+
+//     const result = await response.text();
+//     alert("Doctor Accepted!");
+//     console.log(result);
+// });
+
+document.querySelector(".btn-success").addEventListener("click", async function () {
+    const id = this.getAttribute("data-id");
+    const statusValue = this.value; // ACCEPT
+
+    await fetch(`http://localhost:8080/api/dashboard/update-status/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(statusValue) // 🔥 important!
+    });
+
+    alert(" ACCEPTED ");
+});
+
+
+
+// document.querySelector(".btn-danger").addEventListener("click", async function () {
+
+//     const id = this.getAttribute("data-id"); // doctor userId
+//     const statusValue = this.value; // REJECT
+
+//     const response = await fetch(`http://localhost:8080/api/dashboard/doctor/update-status/${id}`, {
+//         method: "PUT",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Authorization": `Bearer ${token}`
+//         },
+//         body: JSON.stringify(statusValue)
+//     });
+
+//     const result = await response.text();
+//     alert("Doctor Rejected!");
+//     console.log(result);
+// });
+
+
+
+document.querySelector(".btn-danger").addEventListener("click", async function () {
+    const id = this.getAttribute("data-id");
+    const statusValue = this.value; // REJECT
+
+    await fetch(`http://localhost:8080/api/dashboard/update-status/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(statusValue) // 🔥 important!
+    });
+
+    alert(" REJECTED ");
+});
 
 
 </script>

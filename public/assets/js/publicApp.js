@@ -73,7 +73,7 @@ document.getElementById("registrationForm").addEventListener("submit", async fun
 }
 if (data.status === "error" && data.message) {
     document.getElementById("globalError").innerText = data.message;
-    return; // مهمه ده چې نور کوډ نه چلېږي
+    return;
 }
 
    

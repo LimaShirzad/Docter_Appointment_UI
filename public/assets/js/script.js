@@ -65,6 +65,8 @@ async function loadPatientProfile() {
           document.getElementById("id").innerHTML=data.id;
 
 
+                 document.getElementById("profilePicture").src =
+                "data:image/png;base64," + data.profilePicture;
 
 
 

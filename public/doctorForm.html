@@ -189,7 +189,7 @@ let success_msg=document.getElementById("success-msg");
         form.reset();
         // window.location.href="userRegistration.html";
 
-                     const loginResponse = await fetch("http://localhost:8080/auth/login", {
+                    const loginResponse = await fetch("http://localhost:8080/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password })
@@ -210,15 +210,15 @@ let success_msg=document.getElementById("success-msg");
     sessionStorage.setItem("role", loginData.roleId);
 
 
-            // }
+            }
 
              if(response.ok){
 
                 
           setTimeout(() => {
-    msgBox.style.display="none";
-    window.location.href = "doctorDashboard.html";
-}, 2000);
+                msgBox.style.display="none";
+                window.location.href = "docotorWaiting.html";
+        }, 2000);
 
     //   setInterval(() => {
     //             msgBox.style.display="none";
@@ -228,7 +228,7 @@ let success_msg=document.getElementById("success-msg");
     //         }, 4000);
 
              }
-            }
+            // }
             
 });
 

@@ -385,7 +385,55 @@
 
     <script src="assets/js/header.js"></script>
 
+
+
     <script>
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    let msg = document.getElementById("msg");
+
+    try {
+        let res = await fetch("http://localhost:8080/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: username, password: password })
+        });
+
+        let data = await res.json();   // moved INSIDE try
+
+        if (!res.ok) {
+            msg.innerText = data.message || "Invalid credentials!";
+            msg.style.color = "red";
+            return;
+        }
+
+        // SAVE TOKEN
+        sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem("id", data.id);
+        sessionStorage.setItem("username", data.userName);
+        sessionStorage.setItem("role", data.roleId);
+
+        // REDIRECT BASED ON ROLE
+        if (data.roleId == 1) {
+            window.location.href = "doctorDashboard.html";
+        } else if (data.roleId == 72) {
+            window.location.href = "patientDashbord.html";
+        } else {
+            msg.innerText = "Invalid UserName or Password";
+            msg.style.color = "red";
+        }
+
+    } catch (error) {
+        msg.innerText = "Server error!";
+        msg.style.color = "red";
+    }
+});
+</script>
+
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             const passwordToggle = document.getElementById('passwordToggle');
             const passwordInput = document.getElementById('password');
@@ -411,19 +459,34 @@
     let password=document.getElementById("password").value;
     let errmesg=document.getElementById("msg");
 
+    try {
+        
+  
     let res = await fetch("http://localhost:8080/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username: username, password: password })
     });
 
-    
-    
-    
-    
-    
-    
+
+    if (!res.ok) {
+        let data = await res.json();
+        msg.innerText = data.message;
+        msg.style.color = "red";
+        // console
+        return;
+    }
+
+
+       
+      } catch (error) {
+
+ msg.innerText = "Server error!";
+    msg.style.color = "red";
+        
+    }
     let data = await res.json();
+
 
 
      sessionStorage.setItem("token", data.token);
@@ -447,6 +510,7 @@
     }
 
 
+
     console.log("Login response:", data);
 
          
@@ -457,6 +521,6 @@
 
 
 
-    </script>
+    </script> -->
 </body>
 </html>

@@ -551,6 +551,8 @@ async function loadDoctorsWithePagination(page){
 
     const response = await res.json();
     console.log("Doctors response:", response);
+    // console.log("Doctors response:", response.status);
+    // status
 
     const doctors = response.doctors; 
     console.log(doctors);

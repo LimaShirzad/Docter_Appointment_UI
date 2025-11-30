@@ -58,12 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <div class="topbar d-flex justify-content-between align-items-center">
                 <div class="search-bar">
-                
+               
                 </div>
+           
                 <div class="d-flex align-items-center">
               <a class="nav-link" href="doctorProfile.html">
+             
                     <div class="user-profile d-flex align-items-center">
                         <img src="" alt="Doctor" id="doctorImage">
+                        
                         <div class="ms-2">
                             <div class="fw-bold">Dr . <span id="firstName"></span>  <span id="lastName"></span></div>
                             <div class="small text-muted" id="specialty"></div>
